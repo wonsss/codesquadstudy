@@ -1,5 +1,3 @@
-const { read } = require('fs');
-
 //각 도형의 결과값을 저장하는 배열 선언
 let sequenceArr = [];
 
@@ -8,13 +6,10 @@ const getArea = (shape, ...sizes) => {
   switch (shape) {
     case '원':
       return getCircleArea(...sizes);
-      break;
     case '사각형':
       return getRectangleArea(...sizes);
-      break;
     case '사다리꼴':
       return getTrapezoidArea(...sizes);
-      break;
     default:
       break;
   }
