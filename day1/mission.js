@@ -1,16 +1,18 @@
+const { read } = require('fs');
+
 //각 도형의 결과값을 저장하는 배열 선언
 let sequenceArr = [];
 
 //shape 매개변수에 따라 스프레드연산자 매개변수들을 달리 활용하여 각 도형의 넓이 계산하도록 함수 호출
 const getArea = (shape, ...sizes) => {
   switch (shape) {
-    case 'circle':
+    case '원':
       return getCircleArea(...sizes);
       break;
-    case 'rect':
+    case '사각형':
       return getRectangleArea(...sizes);
       break;
-    case 'trapezoid':
+    case '사다리꼴':
       return getTrapezoidArea(...sizes);
       break;
     default:
@@ -64,12 +66,92 @@ const printExecutionSequence = () => {
 
 //테스트
 function test() {
-  getArea('circle', 10);
-  getArea('rect', 10, 15);
-  getArea('trapezoid', 10, 15, 12);
-  getArea('circle', 1, 3);
-  getArea('circle', 1);
+  getArea('원', 10);
+  getArea('사각형', 10, 15);
+  getArea('사다리꼴', 10, 15, 12);
+  getArea('원', 1, 3);
+  getArea('원', 1);
   printExecutionSequence();
 }
 
-test();
+// test();
+
+function executeFunctionByReadingInput(shape, ...sizes) {
+  getArea(shape, ...sizes);
+  printExecutionSequence();
+  playAgain();
+}
+
+const consoleReader = require('readline').createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+function readConsole() {
+  consoleReader.question(
+    '★  어떤 도형의 넓이를 구하고 싶으세요? 원, 사다리꼴, 사각형 중에서 한글로 답변해주세요.',
+    (shape) => {
+      if (shape === '원') {
+        consoleReader.question(
+          '★  반지름의 길이를 입력해주세요. 만약 반지름 1부터 n까지 원들의 넓이 합을 구하고 싶으시면 1과 n을 띄어쓰기 하여 입력해주세요.\n',
+          (sizes) => {
+            const sizeParams = sizes
+              .trim()
+              .split(' ')
+              .map((size) => parseInt(size, 10));
+            executeFunctionByReadingInput(shape, sizeParams[0], sizeParams[1]);
+          }
+        );
+      } else if (shape === '사다리꼴') {
+        consoleReader.question(
+          '★  사다리꼴 변들의 길이를 윗변, 아랫변, 높이를 순서대로 띄어쓰기하여 한줄로 입력해주세요.\n',
+          (sizes) => {
+            const sizeParams = sizes
+              .trim()
+              .split(' ')
+              .map((size) => parseInt(size, 10));
+            executeFunctionByReadingInput(
+              shape,
+              sizeParams[0],
+              sizeParams[1],
+              sizeParams[2]
+            );
+          }
+        );
+      } else if (shape === '사각형') {
+        consoleReader.question(
+          '★  사각형의 가로변과 세로변의 길이를 순서대로 띄어쓰기하여 한줄로 입력해주세요.\n',
+          (sizes) => {
+            const sizeParams = sizes
+              .trim()
+              .split(' ')
+              .map((size) => parseInt(size, 10));
+            executeFunctionByReadingInput(shape, sizeParams[0], sizeParams[1]);
+          }
+        );
+      } else {
+        console.log('★  도형(원, 사다리꼴, 사각형)을 잘못 입력하셨습니다.');
+        playAgain();
+      }
+    }
+  );
+}
+
+const playAgain = () => {
+  consoleReader.question(
+    '★  다시 하고 싶으시면 "다시"이라고 입력해주시고, 종료하고 싶으시면 "종료"라고 입력해주세요.',
+    (input) => {
+      if (input === '다시') {
+        readConsole();
+      } else if (input === '종료') {
+        console.log('★  종료되었습니다.');
+        consoleReader.close();
+      } else {
+        console.log('★  종료 또는 다시 중 한 단어를 입력해주세요');
+        notifyInputError();
+      }
+    }
+  );
+};
+
+readConsole();
