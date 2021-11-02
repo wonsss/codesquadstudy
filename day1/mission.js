@@ -21,6 +21,9 @@ const getArea = (shape, ...sizes) => {
 //도형들의 각각의 넓이를 구하는 함수를 별도로 만든다
 const getCircleArea = (...sizes) => {
   if (sizes[0] === 1) {
+    if (sizes[1] === undefined) {
+      sizes[1] = 1;
+    }
     let sum = 0;
     for (let i = 1; i <= sizes[1]; i++) {
       sum += Math.pow(i, 2) * Math.PI;
@@ -65,6 +68,7 @@ function test() {
   getArea('rect', 10, 15);
   getArea('trapezoid', 10, 15, 12);
   getArea('circle', 1, 3);
+  getArea('circle', 1);
   printExecutionSequence();
 }
 
