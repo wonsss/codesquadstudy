@@ -35,8 +35,21 @@ const findGildong = (result, m, p) => {
 
 //convertBase(n, t, m)
 //n: 진법, t: 몇개의 숫자까지 말하는지, m: 게임 참여자 수
-console.log(convertBase(10, 5, 4));
+console.log(convertBase(16, 5, 4));
+/*
+콘솔 결과
+ [
+  '0', '1', '2', '3', '4',
+  '5', '6', '7', '8', '9',
+  'a', 'b', 'c', 'd', 'e',
+  'f', '1', '0', '1', '1',
+  '1', '2', '1', '3'
+] 
+*/
 
 //findGildong(result, m, p)
 //result: T개의 숫자까지 M명이 진법게임을 한 결과 배열, m: 게임 참여자 수, p: 길동이의 게임 참여 순서(1이면 첫번째)
-console.log(findGildong(convertBase(10, 5, 4), 4, 3));
+console.log(findGildong(convertBase(16, 5, 4), 4, 3));
+/*콘솔 결과 - 객체이다. key는 길동이가 답해야 할 순서이고 value는 길동이가 그 순서에 말해야 할 숫자이다.
+{ '3': '2', '7': '6', '11': 'a', '15': 'e', '19': '1', '23': '1' }
+*/
