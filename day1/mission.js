@@ -143,7 +143,7 @@ const playAgain = () => {
         consoleReader.close();
       } else {
         console.log('★  종료 또는 다시 중 한 단어를 입력해주세요');
-        notifyInputError();
+        playAgain();
       }
     }
   );
