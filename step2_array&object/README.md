@@ -5,7 +5,7 @@
 - 함수의 arguments 프로퍼티
   - arguments객체는 매개변수 개수를 확정할 수 없는 가변 인자 함수를 구현할 때 유용하다.
   - arguments객체는 유사 배열 객체다.
-- 유사 배열 객체(Array-like Objects)는 배열이 아니므로 배열 메서드를 사용하면 에러가 발생한다. 
+- 유사 배열 객체(Array-like Objects)는 배열이 아니므로 배열 메서드를 사용하면 에러가 발생한다.
 - 유사배열객체를 배열로 바꾸려면 다음 3가지 방법 중 하나를 활용할 수 있다.
 
 ### 1-1. 간접호출 활용
@@ -51,3 +51,40 @@
   console.log(sum(1, 2)); //3
   console.log(sum(1, 2, 3)); //6
   ```
+
+## 2. 객체 생성 시 key값을 동적으로 할당하는 방법
+
+객체는 key와 value의 쌍으로 이루어져 있다.
+
+```js
+let myKey = 'keykey';
+let myValue = 'valuevalue';
+let myObject = {
+  myKey: myValue,
+};
+console.log(myObject);
+```
+
+위 코드의 콘솔 결과는 { myKey: 'valuevalue' }이다.
+myKey에 할당된 'keykey'가 위 객체의 key값으로 들어가길 기대했는데, 그냥 myKey 자체가 string으로 받아들여졌다.
+value는 동적으로 할당이 되나, key 부분에는 위와 같은 방법으로는 동적으로 값이 적용되지 않는다.
+해결하기 위해서는 다음과 같이 해야 한다.
+
+### key 값은 대괄호로 묶어서 설정하면 동적으로 적용된다.
+
+```js
+let myKey = 'keykey';
+let myValue = 'valuevalue';
+
+//객체 생성과 동시에 동적인 key 값 설정
+let myObject = {
+  [myKey]: myValue,
+};
+
+let newKey = 'new Key is good';
+// 객체 생성 후 동적인 key 값 설정
+myObject[newKey] = 'this is value';
+
+console.log(myObject);
+//{ keykey: 'valuevalue', 'new Key is good': 'this is value' }
+```
