@@ -99,7 +99,7 @@ function readConsole() {
         );
       } else if (shape === '사다리꼴') {
         consoleReader.question(
-          '★  사다리꼴 변들의 길이를 윗변, 아랫변, 높이를 순서대로 띄어쓰기하여 한줄로 입력해주세요.\n',
+          '★  사다리꼴의 윗변, 아랫변, 높이를 순서대로 띄어쓰기하여 한줄로 입력해주세요.\n',
           (sizes) => {
             const sizeParams = sizes
               .trim()
