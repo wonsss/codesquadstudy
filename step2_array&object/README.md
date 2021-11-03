@@ -88,3 +88,26 @@ myObject[newKey] = 'this is value';
 console.log(myObject);
 //{ keykey: 'valuevalue', 'new Key is good': 'this is value' }
 ```
+
+## 3. 진법 바꾸기
+
+### 3-1. Number 객체의 toString() 메서드 사용
+
+`numObj.toString([radix])`
+toString() 메서드는 특정한 Number 객체를 나타내는 문자열을 반환한다.
+옵션인 `radix`는 수의 값을 나타내기 위해 사용되기 위한 기준을 정하는 2와 36사이의 정수(진수를 나타내는 기수의 값)이다.
+만약에 radix값 이 지정되지 않으면, 임의로 10진수로 가정하게 된다.
+
+### 3-2. 메서드 사용하지 않고 반복문과 %,/ 연산자 사용
+
+```js
+let dec = '33';
+let binaryArr = [];
+
+while (dec) {
+  binaryArr.push(dec % 2);
+  dec = Math.floor(dec / 2);
+}
+
+console.log(binaryArr.reverse().join(''));
+```
