@@ -100,14 +100,17 @@ toString() 메서드는 특정한 Number 객체를 나타내는 문자열을 반
 
 ### 3-2. 메서드 사용하지 않고 반복문과 %,/ 연산자 사용
 
+십진법 숫자를 이진법으로 변환하기
+
 ```js
-let dec = '33';
+let decimalNumber = '10';
 let binaryArr = [];
 
-while (dec) {
-  binaryArr.push(dec % 2);
-  dec = Math.floor(dec / 2);
+while (decimalNumber) {
+  binaryArr.push(decimalNumber % 2);
+  decimalNumber = Math.floor(decimalNumber / 2);
 }
 
 console.log(binaryArr.reverse().join(''));
+//1010
 ```
