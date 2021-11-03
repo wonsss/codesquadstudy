@@ -1,11 +1,6 @@
-console.log('Say anything!');
-
-const myArray = [];
-const consoleReader = require('readline').createInterface({
-  input: process.stdin,
-});
-consoleReader.on('line', (input) => {
-  myArray.push(input);
-  console.log(`Did you say "${input}"?`);
-  consoleReader.close();
-});
+function sum() {
+  realArray = Array.from(arguments);
+  return realArray.reduce((pre, cur) => pre + cur, 0);
+}
+console.log(sum(1, 2)); //3
+console.log(sum(1, 2, 3)); //6
