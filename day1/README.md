@@ -1,13 +1,13 @@
 # Day 1~2
 
 ## 목차
-- [1. 학습 체크포인트](1-학습-체크포인트)
-- [2. NodeJS](2-NodeJS)
-- [3. Git & Github](3-Git-&-Github)
-- [4. debugging 기술문서 정리](4-debugging-기술문서-정리)
-- [5. 웹에서 경로 표기법](5-웹에서-경로-표기법)
-- [6. 자바스크립트 문법(rest파라미터, sperad연산자, forEach](6-자바스크립트-문법)
-- [7. NodeJS에서 입력받기](7-NodeJS에서-입력받기)
+- [1. 학습 체크포인트](#1-학습-체크포인트)
+- [2. NodeJS](#2-NodeJS)
+- [3. Git & Github](#3-Git-&-Github)
+- [4. debugging 기술문서 정리](#4-debugging-기술문서-정리)
+- [5. 웹에서 경로 표기법](#5-웹에서-경로-표기법)
+- [6. 자바스크립트 문법(rest파라미터, sperad연산자, forEach](#6-자바스크립트-문법)
+- [7. NodeJS에서 입력받기](#7-NodeJS에서-입력받기)
 
 ## 1. 학습 체크포인트
 
