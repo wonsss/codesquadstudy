@@ -12,5 +12,6 @@ const myReduce = (arr, callback, initialValue) => {
   return result;
 };
 
-const answer = myReduce(arr, (next, prev) => next + prev, 0);
+const sumreducer = (next, prev) => next + prev;
+const answer = myReduce(arr, sumreducer, 0);
 console.log(answer);

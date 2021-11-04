@@ -11,31 +11,33 @@ solution(2,4,2) //2진수, 4개의 숫자까지, 2명이 말할때
 파라미터로 진법 n, 미리 구할 숫자의 갯수 t, 게임에 참가하는 인원 m, 길동이의 순서 p 가 주어진다.
 */
 
-//convertBase(n, t, m)
-//n: 진법, t: 몇개의 숫자까지 말하는지, m: 게임 참여자 수
-const convertBase = (n, t, m) => {
+//convertBase(base, timesRule, totalNumberOfplayers)
+//base: 진법, timesRule: 몇개의 숫자까지 말하는지, totalNumberOfplayers: 게임 참여자 수
+const convertBase = (base, timesRule, totalNumberOfplayers) => {
   let result = '';
-  for (let i = 0; i < t * m; i++) {
-    result += i.toString(n);
+  for (let i = 0; i < timesRule * totalNumberOfplayers; i++) {
+    result += i.toString(base);
   }
   return result.split('');
 };
 
-//result: T개의 숫자까지 M명이 진법게임을 한 결과 배열, m: 게임 참여자 수, p: 길동이의 게임 참여 순서(1이면 첫번째)
-const findGildong = (result, m, p) => {
+const findGildong = (base, timesRule, totalNumberOfplayers, order) => {
   let gildongSaid = {};
+  const result = convertBase(base, timesRule, totalNumberOfplayers);
   for (const i in result) {
-    // console.log((i % n) + 1);
-    if ((i % m) + 1 === p) {
+    if ((i % totalNumberOfplayers) + 1 === order) {
       gildongSaid[parseInt(i, 10) + 1] = result[i];
     }
   }
-  return gildongSaid;
+  console.log(result);
+  console.log(gildongSaid);
 };
 
-//convertBase(n, t, m)
-//n: 진법, t: 몇개의 숫자까지 말하는지, m: 게임 참여자 수
-console.log(convertBase(16, 5, 4));
+//findGildong(base, timesRule, totalNumberOfplayers, order)
+//base: 진법, timesRule: 몇개의숫자까지 말하는지, totalNumberOfplayers: 게임 참여자 수, order: 길동이의 게임 참여 순서(1이면 첫번째)
+
+//16진법으로 각각 총 5개의 숫자까지 4명의 게임 참여자가 말하는 경우(길동이의 순서는 세 번째)
+findGildong(16, 5, 4, 3);
 /*
 콘솔 결과
  [
@@ -47,9 +49,7 @@ console.log(convertBase(16, 5, 4));
 ] 
 */
 
-//findGildong(result, m, p)
-//result: T개의 숫자까지 M명이 진법게임을 한 결과 배열, m: 게임 참여자 수, p: 길동이의 게임 참여 순서(1이면 첫번째)
-console.log(findGildong(convertBase(16, 5, 4), 4, 3));
 /*콘솔 결과 - 객체이다. key는 길동이가 답해야 할 순서이고 value는 길동이가 그 순서에 말해야 할 숫자이다.
 { '3': '2', '7': '6', '11': 'a', '15': 'e', '19': '1', '23': '1' }
 */
+//순수함수, 같은 값 같은 결론이 나도록..!!

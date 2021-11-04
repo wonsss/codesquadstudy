@@ -9,10 +9,17 @@ const people = ['crong!@#', 'honux5', 'sarah#', 'hea3d', 'zello', '5lucas'];
 const regSpecial = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/;
 const regNumber = /[0-9]/;
 const filterId = (people) => {
+  //거꾸로 for문 돌리기
+  // for (let i = people.length; i >= 0; i--) {
+  //   if (regSpecial.test(people[i])) {
+  //     people.splice(i, 1);
+  //   }
+  // }
+
   for (let i = 0; i < people.length; i++) {
     if (regSpecial.test(people[i])) {
       people.splice(i, 1);
-      i--;
+      // i--;
     }
   }
   for (let i = 0; i < people.length; i++) {

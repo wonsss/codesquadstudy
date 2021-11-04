@@ -13,7 +13,7 @@ const getAverageScoreOfEachStudent = (grades) => {
   let result = [];
   grades.forEach((scores) => {
     const sum = scores.reduce(
-      (accumulator, currentValue, index, array) => accumulator + currentValue,
+      (accumulator, currentValue) => accumulator + currentValue,
       0
     );
     result.push((sum / scores.length).toFixed(1));
