@@ -34,6 +34,7 @@ const getOnlyNumberValue = (data) => {
   for (i in data) {
     for (j in data[i]) {
       if (typeof data[i][j] === 'number') {
+        // console.log(data[i][j]);
         result.push(j);
       }
     }

@@ -12,6 +12,14 @@ const myReduce = (arr, callback, initialValue) => {
   return result;
 };
 
-const sumreducer = (next, prev) => next + prev;
-const answer = myReduce(arr, sumreducer, 0);
-console.log(answer);
+// const sumreducer = (next, prev) => next + prev;
+function sum(next, prev) {
+  return next + prev;
+}
+function mul(next, prev) {
+  return next * prev;
+}
+// const sumreducer = (next, prev) => next + prev;
+
+// const answer = myReduce(arr, mul, 1);
+console.log(myReduce(arr, mul, 1));
