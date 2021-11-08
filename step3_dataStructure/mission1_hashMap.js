@@ -11,7 +11,8 @@ function mapFunction() {
   };
   // containsKey(String) 해당 키가 존재하는지 판단해서 Bool 결과를 리턴한다.
   mapFunction.prototype.containsKey = function (key) {
-    return key in this.myMap;
+    // return key in this.myMap;
+    return Reflect.has(this.myMap, key);
   };
   // containsValue(String) 해당 값이 존재하는지 판단해서 Bool 결과를 리턴한다.
   mapFunction.prototype.containsValue = function (value) {
