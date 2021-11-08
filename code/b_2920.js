@@ -25,10 +25,7 @@ rl.on('line', (input) => {
     .split(' ')
     .sort((a, b) => a - b)
     .join(' ');
-  const descendedInput = input
-    .split(' ')
-    .sort((a, b) => b - a)
-    .join(' ');
+  const descendedInput = input.split(' ').sort().reverse().join(' ');
   if (input === ascendedInput) {
     console.log('ascending');
   } else if (input === descendedInput) {
