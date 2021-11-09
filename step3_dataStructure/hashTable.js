@@ -117,11 +117,17 @@ const hTable = new HashTable(5);
 hTable.put('대한민국', '서울');
 hTable.put('대한민국', '부산');
 hTable.put('일본', '도쿄');
+hTable.put('중국', '베이징');
 hTable.put('영국', '런던');
+hTable.put('싱가폴', '포키');
+hTable.put('우주', '도토리');
+hTable.put('스페인', '지니');
+hTable.put('미국', '지수');
+
 // console.log(hTable.keys());
 // console.log(hTable.get('대한민국'));
 // console.log(hTable.getSize());
-hTable.remove('대한민국');
+// hTable.remove('대한민국');
 
 console.log(hTable.keys());
 
