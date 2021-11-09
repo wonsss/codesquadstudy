@@ -1,5 +1,6 @@
 // 문자열 키와 문자열 값을 저장하는 해시맵 라이브러리를 구현한다.(객체는 JavaScript prototype 속성을 활용한다.)
 function mapFunction() {
+  //5 - 생성자함수 호출될 때 this 누굴 가리킬까? -> 인스턴스
   this.myMap = new Object();
 
   // put(String key, String value) 키-값을 추가한다.

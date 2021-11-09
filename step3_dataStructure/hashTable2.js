@@ -24,13 +24,13 @@ HashTable.prototype.makeHash = function (string, storageSize) {
 //put(String key, String value) 키-값을 추가한다.
 HashTable.prototype.put = function (key, value) {
   const node = new Node(key, value);
-  console.log('-----------', node, '------------');
+  // console.log('-----------', node, '------------');
   const index = this.makeHash(key, this.size);
-  console.log(index);
+  // console.log(index);
   if (!this.storage[index]) {
     this.storage[index] = node;
   } else {
-    console.log('@충돌', this.storage[index]);
+    // console.log('@충돌', this.storage[index]);
     this.collision(node, index);
   }
   return;
@@ -99,18 +99,34 @@ HashTable.prototype.countChains = function (node) {
 HashTable.prototype.remove = function (key) {
   const index = this.makeHash(key, this.size);
   const foundNode = this.storage[index];
-  delete this.storage[index];
-  // if (this.lookUpChain(foundNode.chain, key)) {
-  //   // console.log('@@@@@', this.storage[index]['chain']);
-  //   delete this.storage[index]['chain'];
-  // } else {
-  //   delete this.storage[index];
-  // }
+  // delete this.storage[index];
+  if (this.lookUpChain(foundNode.chain, key)) {
+    // console.log('@@@@@', this.storage[index]['chain']);
+    delete this.storage[index]['chain'];
+  } else {
+    delete this.storage[index];
+  }
 };
 
 //clear() 전체 맵을 초기화한다.
 HashTable.prototype.clear = function () {
-  delete this.storage;
+  return (this.storage = []);
+};
+
+//isEmpty()
+HashTable.prototype.isEmpty = function () {
+  return this.getSize() === 0;
+};
+
+//replace(String key, String value) 키-값으로 기존 값을 대체한다.
+HashTable.prototype.replace = function (key, value) {
+  const index = this.makeHash(key, this.size);
+  const foundNode = this.storage[index];
+  if (foundNode.key === key) {
+    this.storage[index] = value;
+  } else {
+    // this.lookUpChain(foundNode.chain, key) = value;
+  }
 };
 
 const hTable = new HashTable(5);
@@ -119,20 +135,14 @@ hTable.put('대한민국', '부산');
 hTable.put('일본', '도쿄');
 hTable.put('중국', '베이징');
 hTable.put('영국', '런던');
-hTable.put('싱가폴', '포키');
-hTable.put('우주', '도토리');
-hTable.put('스페인', '지니');
-hTable.put('미국', '지수');
 
 // console.log(hTable.keys());
-// console.log(hTable.get('대한민국'));
-// console.log(hTable.getSize());
-// hTable.remove('대한민국');
+console.log(hTable.get('대한민국'));
+console.log(hTable.getSize());
+hTable.remove('대한민국');
+hTable.replace('영국', '어디');
 
+console.log(hTable.isEmpty());
 console.log(hTable.keys());
-
-// console.log(hTable.storage);
-// console.log(hTable.countAll());
-// console.log('-------------------------------');
-// console.log(hTable.lookUp('대한민국'));
-// console.log(hTable.lookUp('Node 101'));
+// hTable.clear();
+// console.log(hTable.isEmpty());
