@@ -49,41 +49,42 @@ class MapFunction {
 }
 
 //인스턴스 생성
-const capitalMap = new MapFunction();
-console.log(capitalMap);
+const 마르코 = new MapFunction();
+const 지수 = new MapFunction();
+console.log(마르코);
 
 //프로토타입 메서드 호출
-capitalMap.put('대한민국', '서울');
-capitalMap.put('일본', '오사카');
-capitalMap.put('중국', '베이징');
-capitalMap.put('베트남', '하노이');
-capitalMap.put('영국', '런던');
+마르코.put('대한민국', '서울');
+마르코.put('일본', '오사카');
+마르코.put('중국', '베이징');
+마르코.put('베트남', '하노이');
+마르코.put('영국', '런던');
 
-console.log('keys() : ', capitalMap.keys());
-console.log('values() : ', capitalMap.values());
+console.log('keys() : ', 마르코.keys());
+console.log('values() : ', 마르코.values());
 
-console.log('containsKey("중국") : ', capitalMap.containsKey('중국'));
+console.log('containsKey("중국") : ', 마르코.containsKey('중국'));
 
 console.log('@실행@ remove("중국")');
-capitalMap.remove('중국');
-console.log('keys() : ', capitalMap.keys());
-console.log('values() : ', capitalMap.values());
-console.log('containsKey("중국") : ', capitalMap.containsKey('중국'));
+마르코.remove('중국');
+console.log('keys() : ', 마르코.keys());
+console.log('values() : ', 마르코.values());
+console.log('containsKey("중국") : ', 마르코.containsKey('중국'));
 
-console.log('isEmpty() : ', capitalMap.isEmpty());
+console.log('isEmpty() : ', 마르코.isEmpty());
 
 console.log('@실행@ replace("일본", "도쿄")');
-capitalMap.replace('일본', '도쿄');
+마르코.replace('일본', '도쿄');
 
-console.log('get("일본") : ', capitalMap.get('일본'));
-console.log('size() : ', capitalMap.size());
+console.log('get("일본") : ', 마르코.get('일본'));
+console.log('size() : ', 마르코.size());
 
 console.log('@실행@ clear() ');
-capitalMap.clear();
+마르코.clear();
 
-console.log('keys() : ', capitalMap.keys());
-console.log('isEmpty() : ', capitalMap.isEmpty());
+console.log('keys() : ', 마르코.keys());
+console.log('isEmpty() : ', 마르코.isEmpty());
 
-// capitalMap.sayHello();  //TypeError: capitalMap.sayHello is not a function
+// 마르코.sayHello();  //TypeError: 마르코.sayHello is not a function
 //정적 메서드 호출, 정적 메서드는 클래스로 호출하고 프로토타입 메서드는 인스턴스로 호출한다.
 MapFunction.sayHello(); //"Hello"
