@@ -25,7 +25,7 @@ HashTable.prototype.put = function (key, value) {
 
 //[]containsKey(String) 해당 키가 존재하는지 판단해서 Bool 결과를 리턴한다.
 HashTable.prototype.containsKey = function (key) {
-  let index = this.makeAscii(key);
+  // let index = this.makeAscii(key);
   // console.log(key, '@@@@', this.storage[index], index);
   // console.log('####', Object.values(this.storage));
   // console.log(
