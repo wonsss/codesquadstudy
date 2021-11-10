@@ -47,6 +47,13 @@ function checkBrackets(data) {
   return true;
 }
 
+const setValueToField = (fields, value) => {
+  const reducer = (acc, item, index, arr) => ({
+    [item]: index + 1 < arr.length ? acc : value,
+  });
+  return fields.reduceRight(reducer, {});
+};
+
 function run(data) {
   try {
     const nestedData = JSON.parse(data);
@@ -63,3 +70,18 @@ function run(data) {
 }
 
 run(data);
+
+/* 문제3번 ...진행중
+const nestedData = JSON.parse(data);
+function analyzeArray(data) {
+  data.forEach((i) => {
+    if (Array.isArray(i)) {
+      console.log('array', i);
+      analyzeArray(i);
+    } else if (typeof i === 'number') {
+      console.log('number', i);
+    }
+  });
+  return;
+}
+analyzeArray(nestedData); */
