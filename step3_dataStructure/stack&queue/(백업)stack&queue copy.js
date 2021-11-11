@@ -8,7 +8,7 @@ function getDepth(data) {
     if (typeof array !== 'object') {
       count++;
     } else {
-      depth++;
+
       getDepth(array);
     }
   });
