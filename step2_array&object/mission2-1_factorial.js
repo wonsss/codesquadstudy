@@ -28,3 +28,9 @@ const pushInArray = (m) => {
 };
 
 console.log(pushInArray(4));
+
+
+  const recurCalculate = (n) => {
+    if (n === 1 || n === 0) return 1;
+    return n * recurCalculate(n - 1);
+  };
