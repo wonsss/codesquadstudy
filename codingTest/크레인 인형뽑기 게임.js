@@ -2,7 +2,7 @@ function solution(board, moves) {
   const bucket = [];
   moves.forEach((m) => {
     for (let i = 0; i < board.length; i++) {
-      if (board[i][m - 1] !== 0) {
+      if (board[i][m - 1]) {
         bucket.push(board[i][m - 1]);
         board[i][m - 1] = 0;
         break;
@@ -14,8 +14,8 @@ function solution(board, moves) {
     for (let i = 0; i < bucket.length - 1; i++) {
       if (bucket[i] === bucket[i + 1]) {
         count += 2;
-        bucket.splice(i, 2);
-        blowPair(bucket);
+        bucket.splice(i, 2); //원본배열 변환
+        blowPair(bucket); //재귀함수
       }
     }
   };

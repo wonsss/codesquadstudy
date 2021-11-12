@@ -81,6 +81,8 @@ class BracketExpert {
     return true;
   }
   //[3] 자료구조 반환 메서드
+  //아래 코드 및 재귀함수 설명을 도식화한 페이지 링크
+  //https://www.figma.com/file/UsSobSv9OotTelwbhddmbz/%EC%9E%AC%EA%B7%80%ED%95%A8%EC%88%98%2C-%ED%8C%8C%EC%84%9C?node-id=0%3A1
   parser(data) {
     const parseArray = (data) => {
       const stack = [];
