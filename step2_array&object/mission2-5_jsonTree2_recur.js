@@ -102,7 +102,7 @@ const digJsonTree = (data, target) => {
         result.push(object['name']);
       }
       //'위에서 object 안으로 파고들어 sk랑 같은지 확인하고 name을 푸시하는 작업'을 계속 재귀하려고 한다.
-      // object안에 또 object가 계속 중첩되어 있으므로, object 중첩 안으로 들어갈 때마다 object[key]가 sting이 아니고 object이다.
+      // object안에 또 object가 계속 중첩되어 있으므로, object 중첩 안으로 들어갈 때마다 object[key]가 string이 아니고 object이다.
       // 그래서 object[key]타입이 object이면, 위에서 했던 '작업'을 재귀하려고 한다.
       // 재귀하면, 알아서 중첩의 끝까지 위 코드의 작업을 반복하여 값을 추가한다.
       if (typeof object[key] === 'object') {
