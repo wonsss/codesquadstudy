@@ -1,22 +1,28 @@
-class ScoreCalculator {
+export default class ScoreCalculator {
   constructor(data) {
     this.data = data;
   }
+
+  //평균 구하기
   getMean() {
     return this.data.reduce((a, b) => a + b) / this.data.length;
   }
+
+  //표준편차 구하기
   getStandardDeviation() {
     return Math.sqrt(
       this.data
         .map((s) => Math.pow(s - this.getMean(), 2))
-        .reduce((a, b) => a + b) /
-        (this.data.length - 1)
+        .reduce((a, b) => a + b) / this.data.length
     );
   }
+
+  //정규화
   getStandardization(x) {
     return ((x - this.getMean()) / this.getStandardDeviation()).toFixed(2);
   }
 
+  //표준정규분포표
   static zTable() {
     return {
       z: [0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09],
@@ -162,6 +168,7 @@ class ScoreCalculator {
     };
   }
 
+  //표준정규분포로 확률구하기(a와 b사이)
   getNormalDistribution(a, b) {
     const that = this;
     function setLimit(x) {
@@ -202,18 +209,20 @@ const data = [
   67.01, 73.78, 64.19, 89.89, 90.32, 73.21, 75.35, 83.22, 74.01,
 ];
 
-const calc1 = new ScoreCalculator(data);
-console.log('평균 : ', calc1.getMean());
-console.log('표준편차 : ', calc1.getStandardDeviation());
-console.log('----------------------------------------------');
-console.log('70점 정규화:', calc1.getStandardization(70));
-console.log('80점 정규화:', calc1.getStandardization(80));
-console.log('70점과 80점 사이 확률', calc1.getNormalDistribution(70, 80));
-console.log('----------------------------------------------');
-console.log('90점 정규화:', calc1.getStandardization(90));
-console.log('100점 정규화:', calc1.getStandardization(100));
-console.log('90점과 100점 사이 확률:', calc1.getNormalDistribution(90, 100));
-console.log('----------------------------------------------');
-console.log('10 정규화:', calc1.getStandardization(10));
-console.log('100 정규화:', calc1.getStandardization(100));
-console.log('10점과 100점 사이 확률:', calc1.getNormalDistribution(10, 100));
+function testCase() {
+  const calc1 = new ScoreCalculator(data);
+  console.log('평균 : ', calc1.getMean());
+  console.log('표준편차 : ', calc1.getStandardDeviation());
+  console.log('----------------------------------------------');
+  console.log('70점 정규화:', calc1.getStandardization(70));
+  console.log('80점 정규화:', calc1.getStandardization(80));
+  console.log('70점과 80점 사이 확률', calc1.getNormalDistribution(70, 80));
+  console.log('----------------------------------------------');
+  console.log('90점 정규화:', calc1.getStandardization(90));
+  console.log('100점 정규화:', calc1.getStandardization(100));
+  console.log('90점과 100점 사이 확률:', calc1.getNormalDistribution(90, 100));
+  console.log('----------------------------------------------');
+  console.log('10 정규화:', calc1.getStandardization(10));
+  console.log('100 정규화:', calc1.getStandardization(100));
+  console.log('10점과 100점 사이 확률:', calc1.getNormalDistribution(10, 100));
+}
