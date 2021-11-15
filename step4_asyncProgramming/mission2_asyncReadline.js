@@ -18,6 +18,8 @@ async function processLineByLine() {
     list[subject] = arr;
     playAgain();
   }
+  console.log(list);
+  printResult(list);
 }
 
 function printResult(list) {
@@ -38,17 +40,15 @@ function printResult(list) {
 
 function playAgain() {
   rl.question(
-    '★ 계속 입력하고 싶으시면 "계속"이라고 입력해주시고, 종료하고 싶으시면 "종료"라고 입력해주세요.',
+    '★ 계속 입력하고 싶으시면 "1"을 입력해주시고, 종료하고 싶으시면 "0"을 입력해주세요.',
     (input) => {
-      if (input === '계속') {
+      if (input === '1') {
         processLineByLine();
-      } else if (input === '종료') {
-        console.log(list);
-        printResult(list);
-        console.log('★  종료되었습니다.');
+      } else if (input === '0') {
+        console.log('★ 종료되었습니다.');
         rl.close();
       } else {
-        console.log('★  종료 또는 계속 중 한 단어를 입력해주세요');
+        console.log('★ 종료하시려면 1을, 계속 입력하시려면 0를 입력해주세요.');
         playAgain();
       }
     }

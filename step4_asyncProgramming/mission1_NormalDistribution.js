@@ -226,3 +226,4 @@ function testCase() {
   console.log('100 정규화:', calc1.getStandardization(100));
   console.log('10점과 100점 사이 확률:', calc1.getNormalDistribution(10, 100));
 }
+// testCase();
