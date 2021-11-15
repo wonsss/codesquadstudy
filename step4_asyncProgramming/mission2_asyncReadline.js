@@ -1,5 +1,6 @@
-import ScoreCalculator from './mission1_NormalDistribution.js';
 import ReadLine from 'readline';
+import ScoreCalculator from './mission1_NormalDistribution.js';
+import quickSort from './quickSort.js';
 
 const rl = ReadLine.createInterface({
   input: process.stdin,
@@ -22,8 +23,9 @@ async function processLineByLine() {
 function printResult(list) {
   Object.keys(list).forEach((key) => {
     console.log(`@@@@@@@@@@${key} 과목 점수 통계@@@@@@@@@@`);
-    let calc = new ScoreCalculator(list[key].map((n) => parseInt(n, 10)));
-    console.log(list[key]);
+    let numberList = list[key].map((n) => parseInt(n, 10));
+    let calc = new ScoreCalculator(numberList);
+    console.log('[과목별 점수 퀵소트 정렬]', quickSort(numberList));
     console.log('[평균]', calc.getMean());
     console.log('[표준편차]', calc.getStandardDeviation());
     console.log(
