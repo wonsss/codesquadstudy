@@ -13,7 +13,9 @@ export default class ScoreCalculator {
     return Math.sqrt(
       this.data
         .map((s) => Math.pow(s - this.getMean(), 2))
-        .reduce((a, b) => a + b) / this.data.length
+        .reduce((a, b) => a + b) /
+        this.data.length -
+        1
     );
   }
 
@@ -23,6 +25,7 @@ export default class ScoreCalculator {
   }
 
   //표준정규분포표
+  //zTable()['0.1'][1]
   static zTable() {
     return {
       z: [0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09],
@@ -170,20 +173,29 @@ export default class ScoreCalculator {
 
   //표준정규분포로 확률구하기(a와 b사이)
   getNormalDistribution(a, b) {
-    const that = this;
+    //메서드 내부의 중첩 함수나 콜백 함수의 this 바인딩을 메서드의 this 바인딩과 일치시키기 위한 방법은 this 바인딩을 변수 that에 할당하거나 bind메서드 사용, 또는 화살표 함수를 쓰면 this 그냥 써도 된다.
+    /*     const that = this;
     function setLimit(x) {
       if (Math.abs(that.getStandardization(x)) >= 3.5) {
         return 3.49;
       } else {
         return Math.abs(that.getStandardization(x));
       }
-    }
+    } */
+
+    const setLimit = (x) => {
+      if (Math.abs(this.getStandardization(x)) >= 3.5) {
+        return 3.49;
+      } else {
+        return Math.abs(this.getStandardization(x));
+      }
+    };
     function getRow(x) {
-      const row = +String(setLimit(x).toFixed(2)).substr(0, 3);
+      const row = +setLimit(x).toFixed(2).substr(0, 3); //0.1
       return row;
     }
     function getCol(x) {
-      const col = +String(setLimit(x).toFixed(2)).substr(-1, 1);
+      const col = +setLimit(x).toFixed(2).substr(-1, 1);
       return col;
     }
     if (
@@ -226,4 +238,4 @@ function testCase() {
   console.log('100 정규화:', calc1.getStandardization(100));
   console.log('10점과 100점 사이 확률:', calc1.getNormalDistribution(10, 100));
 }
-// testCase();
+testCase();
