@@ -3,8 +3,6 @@ import ScoreCalculator from './mission1_NormalDistribution.js';
 import quickSort from './quickSort.js';
 import fs from 'fs';
 
-const fsReader = fs.readFileSync('step4_asyncProgramming/input.txt').toString();
-
 const rl = ReadLine.createInterface({
   input: process.stdin,
   output: process.stdout,
@@ -27,6 +25,22 @@ const overWrite = (data) => {
   return listCopy;
 };
 
+const askPlayAgain = () => {
+  rl.question(
+    '계속 프로그램을 실행하려면 "계속"을 입력해주시고, 종료하시면 "종료"라고 입력해주세요.',
+    (input) => {
+      if (input === '계속') {
+        main();
+      } else if (input === '종료') {
+        process.exit(0);
+      } else {
+        console.log('잘못 입력하셨습니다.');
+        askPlayAgain();
+      }
+    }
+  );
+};
+
 const createData = async (list = {}) => {
   let subjects = String(await getLine()).split(' ');
   for (const subject of subjects) {
@@ -46,18 +60,20 @@ const createData = async (list = {}) => {
     );
   }
   overWrite(list);
-  process.exit(0);
+  askPlayAgain();
 };
 
 const deleteData = (prevData, subject) => {
   delete prevData[subject];
   overWrite(prevData);
-  process.exit(0);
+  askPlayAgain();
+  return;
 };
 
 const resetData = () => {
-  overWrite('');
-  process.exit(0);
+  overWrite(null);
+  console.log('초기화가 완료되었습니다.');
+  askPlayAgain();
 };
 
 const chooseNext = (input, prevData) => {
@@ -69,8 +85,9 @@ const chooseNext = (input, prevData) => {
       return createData(prevData);
     case '삭제':
       rl.question('삭제를 원하는 과목명을 입력해주세요', (subject) => {
-        return deleteData(prevData, subject);
+        deleteData(prevData, subject);
       });
+      return;
     case '초기화':
       return resetData();
     default:
@@ -79,6 +96,10 @@ const chooseNext = (input, prevData) => {
 };
 
 const main = () => {
+  const fsReader = fs
+    .readFileSync('step4_asyncProgramming/input.txt')
+    .toString();
+
   if (fsReader.includes('{')) {
     const prevData = JSON.parse(fsReader);
     console.log(prevData);
