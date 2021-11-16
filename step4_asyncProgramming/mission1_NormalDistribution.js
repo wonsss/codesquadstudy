@@ -233,9 +233,9 @@ function testCase() {
   console.log('80점 정규화:', calc1.getNormalization(80));
   console.log('70점과 80점 사이 확률', calc1.getNormalDistribution(70, 80));
   console.log('----------------------------------------------');
-  console.log('90점 정규화:', calc1.getNormalization(90));
+  console.log('91점 정규화:', calc1.getNormalization(91));
   console.log('100점 정규화:', calc1.getNormalization(100));
-  console.log('90점과 100점 사이 확률:', calc1.getNormalDistribution(90, 100));
+  console.log('91점과 100점 사이 확률:', calc1.getNormalDistribution(91, 100));
   console.log('----------------------------------------------');
   console.log('10 정규화:', calc1.getNormalization(10));
   console.log('100 정규화:', calc1.getNormalization(100));

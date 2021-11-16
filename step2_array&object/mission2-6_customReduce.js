@@ -5,11 +5,15 @@ Array 의 reduce 메서드처럼 동작하는 **myReduce** 메서드를 만들
 const arr = [1, 2, 3, 4];
 
 const myReduce = (arr, callback, initialValue) => {
-  let result = initialValue;
-  for (let i = 0; i < arr.length; i++) {
-    result = callback(result, arr[i]);
+  if (Array.isArray(arr)) {
+    let result = initialValue;
+    for (let i = 0; i < arr.length; i++) {
+      result = callback(result, arr[i]);
+    }
+    return result;
+  } else {
+    throw '배열을 입력해주세요';
   }
-  return result;
 };
 
 // const sumreducer = (next, prev) => next + prev;

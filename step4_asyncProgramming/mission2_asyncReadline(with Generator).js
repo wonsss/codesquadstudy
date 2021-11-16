@@ -20,7 +20,14 @@ const getLine = (function () {
   return async () => (await getLineGen.next()).value;
 })();
 
-const main = async (list = {}) => {
+const overWrite = (data) => {
+  const listCopy = JSON.stringify(data, null, 2);
+  fs.writeFileSync('step4_asyncProgramming/input.txt', listCopy);
+  console.log(listCopy);
+  return listCopy;
+};
+
+const createData = async (list = {}) => {
   let subjects = String(await getLine()).split(' ');
   for (const subject of subjects) {
     console.log(
@@ -38,24 +45,55 @@ const main = async (list = {}) => {
       80
     );
   }
-  const listCopy = JSON.stringify(list, null, 2);
-  fs.writeFileSync('step4_asyncProgramming/input.txt', listCopy);
-
-  console.log(listCopy);
+  overWrite(list);
   process.exit(0);
 };
-//실행
-if (fsReader.includes('{')) {
-  const prevData = JSON.parse(fsReader);
-  console.log(prevData);
-  console.log(`
-  기존에 입력되어 있는 데이터는 위와 같습니다.
+
+const deleteData = (prevData, subject) => {
+  delete prevData[subject];
+  overWrite(prevData);
+  process.exit(0);
+};
+
+const resetData = () => {
+  overWrite('');
+  process.exit(0);
+};
+
+const chooseNext = (input, prevData) => {
+  switch (input) {
+    case '추가':
+      console.log(`
   추가로 점수를 입력할 과목명들을 한 줄에 띄어쓰기하여 입력해주세요.
   기존에 존재하는 과목명에 선택하실 경우, 새 점수가 기존 점수를 덮어쓰게 됩니다`);
-  main(prevData);
-} else {
-  console.log(`
+      return createData(prevData);
+    case '삭제':
+      rl.question('삭제를 원하는 과목명을 입력해주세요', (subject) => {
+        return deleteData(prevData, subject);
+      });
+    case '초기화':
+      return resetData();
+    default:
+      break;
+  }
+};
+
+const main = () => {
+  if (fsReader.includes('{')) {
+    const prevData = JSON.parse(fsReader);
+    console.log(prevData);
+
+    rl.question(
+      '기존 데이터가 있습니다. 과목에 대한 "추가","삭제","초기화" 중에서 원하는 동작을 입력해주세요.',
+      (input) => {
+        chooseNext(input, prevData);
+      }
+    );
+  } else {
+    console.log(`
   기존에 입력된 데이터는 없습니다.
   점수를 입력할 과목명들을 한 줄에 띄어쓰기하여 입력해주세요.`);
-  main();
-}
+    createData();
+  }
+};
+main();
