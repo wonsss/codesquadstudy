@@ -21,7 +21,7 @@ function quickSort(arr) {
 }
 
 function testCase() {
-  const data = ['50', '100', '38', '48', '58', '29', '38', '49'];
+  const data = [50, 100, 38, 48, 58, 29, 38, 49];
   console.log(data);
   console.log(quickSort(data));
 }

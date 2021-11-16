@@ -31,14 +31,14 @@ const overWrite = (data) => {
 
 const askPlayAgain = () => {
   rl.question(
-    '계속 프로그램을 실행하려면 "계속"을 입력해주시고, 종료하시면 "종료"라고 입력해주세요.',
+    '[Bot]: 계속 프로그램을 실행하려면 "계속"을 입력해주시고, 종료하시면 "종료"라고 입력해주세요.\n',
     (input) => {
       if (input === '계속') {
         main();
       } else if (input === '종료') {
         process.exit(0);
       } else {
-        console.log('잘못 입력하셨습니다.');
+        console.log('[Bot]: 잘못 입력하셨습니다.');
         askPlayAgain();
       }
     }
@@ -49,7 +49,7 @@ const createData = async (list = {}) => {
   let subjects = String(await getLine()).split(' ');
   for (const subject of subjects) {
     console.log(
-      `${subject} 과목의 점수들을 한 줄에 띄어쓰기하여 입력해주세요.`
+      `[Bot]: ${subject} 과목의 점수들을 한 줄에 띄어쓰기하여 입력해주세요.(ex, 86 65 76 58)`
     );
     const arr = String(await getLine()).split(' ');
     let numberList = arr.map((n) => parseInt(n, 10));
@@ -70,31 +70,46 @@ const createData = async (list = {}) => {
 const deleteData = (prevData, subject) => {
   delete prevData[subject];
   overWrite(prevData);
+  console.log(`[Bot]: ${subject} 과목 삭제가 완료되었습니다.`);
   askPlayAgain();
   return;
 };
 
 const resetData = () => {
-  overWrite(null);
-  console.log('초기화가 완료되었습니다.');
+  overWrite({});
+  console.log('[Bot]: 초기화가 완료되었습니다.');
   askPlayAgain();
+};
+
+const notifyExistingDataAndQuestion = (prevData) => {
+  rl.question(
+    '[Bot]: 기존 데이터가 있습니다. 과목에 대한 "추가","삭제","초기화" 중에서 원하는 동작을 입력해주세요.\n',
+    (input) => {
+      chooseNext(input, prevData);
+    }
+  );
 };
 
 const chooseNext = (input, prevData) => {
   switch (input) {
     case '추가':
       console.log(`
-  추가로 점수를 입력할 과목명들을 한 줄에 띄어쓰기하여 입력해주세요.
-  기존에 존재하는 과목명에 선택하실 경우, 새 점수가 기존 점수를 덮어쓰게 됩니다`);
+[Bot]: 추가로 점수를 입력할 과목명들을 한 줄에 띄어쓰기하여 입력해주세요.
+       기존에 존재하는 과목명에 선택하실 경우, 새 점수가 기존 점수를 덮어쓰게 됩니다.(ex, 영어 수학 과학)`);
       return createData(prevData);
     case '삭제':
-      rl.question('삭제를 원하는 과목명을 입력해주세요', (subject) => {
-        deleteData(prevData, subject);
-      });
+      rl.question(
+        '[Bot]: 삭제를 원하는 과목명을 입력해주세요.\n',
+        (subject) => {
+          deleteData(prevData, subject);
+        }
+      );
       return;
     case '초기화':
       return resetData();
     default:
+      console.log('[Bot]: 잘못 입력하셨습니다.');
+      notifyExistingDataAndQuestion(prevData);
       break;
   }
 };
@@ -103,21 +118,14 @@ const main = () => {
   const fsReader = fs
     .readFileSync('step4_asyncProgramming/input.txt')
     .toString();
-
-  if (fsReader.includes('{')) {
-    const prevData = JSON.parse(fsReader);
+  const prevData = JSON.parse(fsReader);
+  if (Object.keys(prevData).length >= 1) {
     console.log(prevData);
-
-    rl.question(
-      '기존 데이터가 있습니다. 과목에 대한 "추가","삭제","초기화" 중에서 원하는 동작을 입력해주세요.',
-      (input) => {
-        chooseNext(input, prevData);
-      }
-    );
+    notifyExistingDataAndQuestion(prevData);
   } else {
     console.log(`
-  기존에 입력된 데이터는 없습니다.
-  점수를 입력할 과목명들을 한 줄에 띄어쓰기하여 입력해주세요.`);
+[Bot]: 기존에 입력된 데이터는 없습니다.
+       점수를 입력할 과목명들을 한 줄에 띄어쓰기하여 입력해주세요.(ex, 수학 영어 과학)`);
     createData();
   }
 };
