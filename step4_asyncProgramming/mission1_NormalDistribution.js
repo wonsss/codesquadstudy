@@ -177,16 +177,6 @@ export default class ScoreCalculator {
 
   //표준정규분포로 확률구하기(a와 b사이)
   getNormalDistribution(a, b) {
-    //메서드 내부의 중첩 함수나 콜백 함수의 this 바인딩을 메서드의 this 바인딩과 일치시키기 위한 방법은 this 바인딩을 변수 that에 할당하거나 bind메서드 사용, 또는 화살표 함수를 쓰면 this 그냥 써도 된다.
-    /*     const that = this;
-    function setLimit(x) {
-      if (Math.abs(that.getNormalization(x)) >= 3.5) {
-        return 3.49;
-      } else {
-        return Math.abs(that.getNormalization(x));
-      }
-    } */
-
     const setLimit = (x) => {
       if (Math.abs(this.getNormalization(x)) >= 3.5) {
         return 3.49;
@@ -218,13 +208,13 @@ export default class ScoreCalculator {
   }
 }
 
-// const data = [
-//   89.23, 82.03, 71.56, 78.82, 85.05, 84.44, 67.53, 71.7, 77.97, 73.77, 84.25,
-//   67.01, 73.78, 64.19, 89.89, 90.32, 73.21, 75.35, 83.22, 74.01,
-// ];
-const data = [91, 91, 91];
-
 function testCase() {
+  // const data = [
+  //   89.23, 82.03, 71.56, 78.82, 85.05, 84.44, 67.53, 71.7, 77.97, 73.77, 84.25,
+  //   67.01, 73.78, 64.19, 89.89, 90.32, 73.21, 75.35, 83.22, 74.01,
+  // ];
+
+  const data = [91, 91, 91];
   const calc1 = new ScoreCalculator(data);
   console.log('평균 : ', calc1.getMean());
   console.log('표준편차 : ', calc1.getStandardDeviation());
