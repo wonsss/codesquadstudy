@@ -1,4 +1,4 @@
-export default class ScoreCalculator {
+class ScoreCalculator {
   constructor(data) {
     this.data = data;
   }
@@ -232,3 +232,5 @@ function testCase() {
   console.log('10점과 100점 사이 확률:', calc1.getNormalDistribution(10, 100));
 }
 // testCase();
+
+module.exports = ScoreCalculator;

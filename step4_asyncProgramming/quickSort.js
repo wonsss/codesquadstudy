@@ -1,4 +1,4 @@
-export default function quickSort(arr) {
+function quickSort(arr) {
   if (arr.length <= 1) {
     return arr;
   }
@@ -26,3 +26,5 @@ function testCase() {
   console.log(quickSort(data));
 }
 // testCase();
+
+module.exports = quickSort;
