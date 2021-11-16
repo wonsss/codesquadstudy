@@ -14,14 +14,18 @@ export default class ScoreCalculator {
       this.data
         .map((s) => Math.pow(s - this.getMean(), 2))
         .reduce((a, b) => a + b) /
-        this.data.length -
-        1
+        (this.data.length - 1)
     );
   }
 
   //정규화
-  getStandardization(x) {
-    return ((x - this.getMean()) / this.getStandardDeviation()).toFixed(2);
+  getNormalization(x) {
+    //표준편차가 0인 경우 정규화할 때 에러처리방법 : 정규화값 구할 때 나누는 값에 엡실론을 더해준다
+    //https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Number/EPSILON
+    const sd = this.getStandardDeviation();
+    return sd === 0
+      ? ((x - this.getMean()) / (sd + Number.EPSILON)).toFixed(2)
+      : ((x - this.getMean()) / sd).toFixed(2);
   }
 
   //표준정규분포표
@@ -176,31 +180,29 @@ export default class ScoreCalculator {
     //메서드 내부의 중첩 함수나 콜백 함수의 this 바인딩을 메서드의 this 바인딩과 일치시키기 위한 방법은 this 바인딩을 변수 that에 할당하거나 bind메서드 사용, 또는 화살표 함수를 쓰면 this 그냥 써도 된다.
     /*     const that = this;
     function setLimit(x) {
-      if (Math.abs(that.getStandardization(x)) >= 3.5) {
+      if (Math.abs(that.getNormalization(x)) >= 3.5) {
         return 3.49;
       } else {
-        return Math.abs(that.getStandardization(x));
+        return Math.abs(that.getNormalization(x));
       }
     } */
 
     const setLimit = (x) => {
-      if (Math.abs(this.getStandardization(x)) >= 3.5) {
+      if (Math.abs(this.getNormalization(x)) >= 3.5) {
         return 3.49;
       } else {
-        return Math.abs(this.getStandardization(x));
+        return Math.abs(this.getNormalization(x));
       }
     };
     function getRow(x) {
-      const row = +setLimit(x).toFixed(2).substr(0, 3); //0.1
-      return row;
+      return +setLimit(x).toFixed(2).substr(0, 3);
     }
     function getCol(x) {
-      const col = +setLimit(x).toFixed(2).substr(-1, 1);
-      return col;
+      return +setLimit(x).toFixed(2).substr(-1, 1);
     }
     if (
-      Math.sign(this.getStandardization(a)) !==
-      Math.sign(this.getStandardization(b))
+      Math.sign(this.getNormalization(a)) !==
+      Math.sign(this.getNormalization(b))
     ) {
       return (
         this.constructor.zTable()[getRow(a)][getCol(a)] +
@@ -216,26 +218,27 @@ export default class ScoreCalculator {
   }
 }
 
-const data = [
-  89.23, 82.03, 71.56, 78.82, 85.05, 84.44, 67.53, 71.7, 77.97, 73.77, 84.25,
-  67.01, 73.78, 64.19, 89.89, 90.32, 73.21, 75.35, 83.22, 74.01,
-];
+// const data = [
+//   89.23, 82.03, 71.56, 78.82, 85.05, 84.44, 67.53, 71.7, 77.97, 73.77, 84.25,
+//   67.01, 73.78, 64.19, 89.89, 90.32, 73.21, 75.35, 83.22, 74.01,
+// ];
+const data = [91, 91, 91];
 
 function testCase() {
   const calc1 = new ScoreCalculator(data);
   console.log('평균 : ', calc1.getMean());
   console.log('표준편차 : ', calc1.getStandardDeviation());
   console.log('----------------------------------------------');
-  console.log('70점 정규화:', calc1.getStandardization(70));
-  console.log('80점 정규화:', calc1.getStandardization(80));
+  console.log('70점 정규화:', calc1.getNormalization(70));
+  console.log('80점 정규화:', calc1.getNormalization(80));
   console.log('70점과 80점 사이 확률', calc1.getNormalDistribution(70, 80));
   console.log('----------------------------------------------');
-  console.log('90점 정규화:', calc1.getStandardization(90));
-  console.log('100점 정규화:', calc1.getStandardization(100));
+  console.log('90점 정규화:', calc1.getNormalization(90));
+  console.log('100점 정규화:', calc1.getNormalization(100));
   console.log('90점과 100점 사이 확률:', calc1.getNormalDistribution(90, 100));
   console.log('----------------------------------------------');
-  console.log('10 정규화:', calc1.getStandardization(10));
-  console.log('100 정규화:', calc1.getStandardization(100));
+  console.log('10 정규화:', calc1.getNormalization(10));
+  console.log('100 정규화:', calc1.getNormalization(100));
   console.log('10점과 100점 사이 확률:', calc1.getNormalDistribution(10, 100));
 }
-testCase();
+// testCase();
