@@ -4,7 +4,7 @@ const toDoList = document.getElementById('todo-list');
 const doneList = document.getElementById('done-list');
 const todoCount = document.getElementById('todo-count');
 const completeCount = document.getElementById('complete-count');
-console.log(addInput);
+console.log(addInput.value);
 let todoStorage = []; //
 let completeStorage = [];
 const TODO_KEY = 'MarcoTODO';
@@ -14,10 +14,49 @@ function countLength() {
   completeCount.innerText = completeStorage.length;
 }
 
+function modifyTodo(e) {
+  e.preventDefault();
+  const li = e.target.parentElement;
+  const theId = li.id;
+  const modifyForm = document.createElement('form');
+  modifyForm.className = 'modify-form';
+  const modifyInput = document.createElement('input');
+  modifyInput.className = 'modify-input';
+  const modifyObj = todoStorage.find((todo) => todo.id === parseInt(theId));
+
+  modifyInput.value = modifyObj['text'];
+
+  const modifyBtn = document.createElement('button');
+  modifyBtn.className = 'modified-btn';
+  modifyBtn.innerText = '수정 완료';
+  modifyForm.addEventListener('submit', modifySubmit);
+  modifyForm.appendChild(modifyInput);
+  modifyForm.appendChild(modifyBtn);
+  li.childNodes[1].replaceWith(modifyForm);
+  li.childNodes[2].remove();
+  li.childNodes[2].remove();
+  li.childNodes[2].remove();
+  modifyInput.focus();
+  function modifySubmit() {
+    e.preventDefault();
+    const changedText = modifyInput.value;
+    const modifyObj = todoStorage.find((todo) => todo.id === parseInt(theId));
+    const modifyObjIndex = todoStorage.findIndex(
+      (todo) => todo.id === parseInt(theId)
+    );
+
+    modifyObj['text'] = changedText;
+    todoStorage.splice(modifyObjIndex, 1, modifyObj);
+    saveTodo(TODO_KEY, todoStorage);
+  }
+}
+
 function paintTodo(obj) {
   const li = document.createElement('li');
   li.className = 'todo-line';
   li.id = obj.id;
+
+  //<li>      </li>
 
   const daySpan = document.createElement('span');
   daySpan.className = 'add-day';
@@ -26,6 +65,11 @@ function paintTodo(obj) {
   const todoSpan = document.createElement('span');
   todoSpan.className = 'todo-span';
   todoSpan.innerText = obj.text;
+
+  const modifyBtn = document.createElement('button');
+  modifyBtn.className = 'modify-btn';
+  modifyBtn.innerText = '수정';
+  modifyBtn.addEventListener('click', modifyTodo);
 
   const deleteBtn = document.createElement('button');
   deleteBtn.className = 'delete-btn';
@@ -39,6 +83,7 @@ function paintTodo(obj) {
 
   li.appendChild(daySpan);
   li.appendChild(todoSpan);
+  li.appendChild(modifyBtn);
   li.appendChild(deleteBtn);
   li.appendChild(completeBtn);
   toDoList.prepend(li);
@@ -52,6 +97,7 @@ function saveTodo(key, storage) {
 
 function deleteTodo(e) {
   const li = e.target.parentElement;
+
   li.remove(); //delete버튼의 부모인 toto-line 요소를 지운다.
   todoStorage = todoStorage.filter((todo) => todo.id !== parseInt(li.id));
   saveTodo(TODO_KEY, todoStorage); //로컬스토리지에 저장할 배열에도 클릭된 요소와 같은 id를 지닌 요소를 뺀 나머지만을 저장한다.
@@ -120,7 +166,7 @@ function paintCompleteTodo(obj) {
 
   const backBtn = document.createElement('button');
   backBtn.className = 'back-btn';
-  backBtn.innerText = '덜함';
+  backBtn.innerText = '되돌리기';
   backBtn.addEventListener('click', backTodo);
 
   li.appendChild(addDaySpan);
