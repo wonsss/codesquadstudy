@@ -2,6 +2,9 @@
 
 ## TODO LIST 웹 만들기
 
+- 결과물 링크
+  - https://wonsss.github.io/codesquadstudy/step5_DOM/index.html
+
 - 나의 Todo list 웹 설계
 
   - [x] 할 일 추가 기능
@@ -13,5 +16,3 @@
   - [x] 할 일 및 완료한 일 개수 표시
   - [x] 로컬스토리지에 저장 및 불러오기
 
-- 결과물 링크
-  - https://wonsss.github.io/codesquadstudy/step5_DOM/index.html
