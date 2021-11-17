@@ -1,6 +1,6 @@
 import ReadLine from 'readline';
-import ScoreCalculator from './mission1_NormalDistribution.js';
-import quickSort from './quickSort.js';
+import ScoreCalculator from '../mission1_NormalDistribution.js';
+import quickSort from '../quickSort.js';
 import fs from 'fs';
 
 const rl = ReadLine.createInterface({

@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
+:root {
+  --add: #023047;
+  --todo1: #219ebc;
+  --todo2: #8ecae6;
+  --done1: #fb8500;
+  --done2: #ffb703;
+}
+* {
+  box-sizing: border-box;
+  font-family: 'Jua', sans-serif;
+}
+
+body {
+  background-color: #f7f7f7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.container {
+  margin: 30px auto;
+  width: 800px;
+}
+
+.add-container {
+}
+
+.form {
+  padding-bottom: 20px;
+  margin: 20px 0;
+}
+
+.add-form {
+  display: flex;
+  justify-content: space-between;
+}
+
+.todo-container {
+}
+
+.done-container {
+}
+
+input {
+  border: 1px solid #dedede;
+  border-radius: 5px;
+  display: block;
+  padding: 10px;
+  margin-right: 5px;
+  width: 85%;
+  color: var(--add);
+}
+
+.add-btn {
+  background-color: var(--add);
+  color: #fff;
+  width: 15%;
+}
+
+button {
+  border: 0;
+  display: block;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  color: #fff;
+}
+
+input:focus,
+button:focus {
+  outline: 0;
+}
+
+li {
+  list-style-type: none;
+}
+.todo-list {
+  padding: 0;
+  margin: 0;
+}
+
+.todo-line {
+  background-color: var(--todo2);
+  color: var(--add);
+  padding: 8px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0 0 5px 0;
+}
+
+.todo-span {
+  width: 90%;
+  display: block;
+}
+
+.add-day {
+  background-color: var(--todo1);
+  border-radius: 10px;
+  width: 55px;
+  margin-right: 5px;
+  padding: 5px;
+  color: #fff;
+}
+
+.delete-btn {
+  width: 50px;
+  height: 28px;
+  background-color: darkgray;
+  margin-right: 3px;
+}
+
+.complete-btn {
+  width: 50px;
+  height: 28px;
+  background-color: var(--done2);
+}
+
+.done-list {
+  margin: 0 0 4px 0;
+  padding: 0;
+}
+
+.done-line {
+  background-color: var(--done2);
+  color: var(--add);
+  padding: 8px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 0 0 5px 0;
+  position: relative;
+}
+
+.add-day-done {
+  background-color: var(--todo1);
+  border-radius: 10px;
+  padding: 5px;
+  color: #fff;
+  width: 50px;
+  margin-right: 5px;
+  /* text-decoration: line-through; */
+}
+.end-day {
+  background-color: var(--done1);
+  border-radius: 10px;
+  padding: 5px;
+  width: 50px;
+  color: #fff;
+  margin-right: 10px;
+}
+.done-span {
+  display: block;
+}
+
+.back-btn {
+  width: 42px;
+  height: 28px;
+  background-color: var(--todo2);
+  right: 8px;
+  position: absolute;
+}
+
+.todo-count {
+  background-color: var(--todo1);
+  font-size: 20px;
+  padding: 3px 9px;
+  border-radius: 30px;
+  color: #fff;
+}
+.complete-count {
+  background-color: var(--done1);
+  font-size: 20px;
+  padding: 3px 9px;
+  border-radius: 30px;
+  color: #fff;
+}
+@media (max-width: 800px) {
+  .container {
+    width: 450px;
+  }
+}
