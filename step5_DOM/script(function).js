@@ -4,11 +4,12 @@ const toDoList = document.getElementById('todo-list');
 const doneList = document.getElementById('done-list');
 const todoCount = document.getElementById('todo-count');
 const completeCount = document.getElementById('complete-count');
-console.log(addInput.value);
+
 let todoStorage = []; //
 let completeStorage = [];
 const TODO_KEY = 'MarcoTODO';
 const COMPLETE_KEY = 'MarcoCOMPLETE';
+
 function countLength() {
   todoCount.innerText = todoStorage.length;
   completeCount.innerText = completeStorage.length;
@@ -23,7 +24,6 @@ function modifyTodo(e) {
   const modifyInput = document.createElement('input');
   modifyInput.className = 'modify-input';
   const modifyObj = todoStorage.find((todo) => todo.id === parseInt(theId));
-
   modifyInput.value = modifyObj['text'];
 
   const modifyBtn = document.createElement('button');
@@ -55,8 +55,6 @@ function paintTodo(obj) {
   const li = document.createElement('li');
   li.className = 'todo-line';
   li.id = obj.id;
-
-  //<li>      </li>
 
   const daySpan = document.createElement('span');
   daySpan.className = 'add-day';
@@ -97,7 +95,6 @@ function saveTodo(key, storage) {
 
 function deleteTodo(e) {
   const li = e.target.parentElement;
-
   li.remove(); //delete버튼의 부모인 toto-line 요소를 지운다.
   todoStorage = todoStorage.filter((todo) => todo.id !== parseInt(li.id));
   saveTodo(TODO_KEY, todoStorage); //로컬스토리지에 저장할 배열에도 클릭된 요소와 같은 id를 지닌 요소를 뺀 나머지만을 저장한다.
@@ -106,12 +103,12 @@ function deleteTodo(e) {
 
 function completeTodo(e) {
   e.preventDefault();
-
   const li = e.target.parentElement;
   const completeObj = todoStorage.find((todo) => todo.id === parseInt(li.id));
-  todoStorage = todoStorage.filter((todo) => todo.id !== parseInt(li.id));
-  li.remove();
+  todoStorage = todoStorage.filter((todo) => todo.id !== parseInt(li.id)); //todo에서 하나 빼주고
+  li.remove(); //렌더링
   saveTodo(TODO_KEY, todoStorage);
+
 
   const now = new Date();
   const month = now.getMonth() + 1;
@@ -121,8 +118,8 @@ function completeTodo(e) {
   completeObj['endDay'] = `${month}.${date}. ${hour}:${minute}`;
   completeObj['status'] = 'settled';
   completeStorage.push(completeObj);
-  paintCompleteTodo(completeObj);
-  saveTodo(COMPLETE_KEY, completeStorage);
+  paintCompleteTodo(completeObj); //렌더링
+  saveTodo(COMPLETE_KEY, completeStorage); //
   countLength();
 }
 
@@ -151,24 +148,19 @@ function paintCompleteTodo(obj) {
   const li = document.createElement('li');
   li.className = 'done-line';
   li.id = obj.id;
-
   const addDaySpan = document.createElement('span');
   addDaySpan.className = 'add-day-done';
   addDaySpan.innerText = obj.addDay;
-
   const endDaySpan = document.createElement('span');
   endDaySpan.className = 'end-day';
   endDaySpan.innerText = obj.endDay;
-
   const doneSpan = document.createElement('span');
   doneSpan.className = 'done-span';
   doneSpan.innerText = obj.text;
-
   const backBtn = document.createElement('button');
   backBtn.className = 'back-btn';
   backBtn.innerText = '되돌리기';
   backBtn.addEventListener('click', backTodo);
-
   li.appendChild(addDaySpan);
   li.appendChild(endDaySpan);
   li.appendChild(doneSpan);
@@ -184,7 +176,6 @@ function mainSubmit(e) {
   const date = now.getDate();
   const hour = beautifyTime(now.getHours());
   const minute = beautifyTime(now.getMinutes());
-
   const newTodoObj = {
     text: addInput.value,
     id: Date.now(),

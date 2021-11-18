@@ -226,6 +226,7 @@ li {
   background-color: #219ebc;
   margin-right: 3px;
 }
+
 @media (max-width: 800px) {
   h1 {
     font-size: 30px;
