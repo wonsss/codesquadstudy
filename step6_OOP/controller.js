@@ -108,6 +108,7 @@ export default class TodoController {
     $li.appendChild($completeBtn);
     this.view.renderTodo($li);
     this.view.renderCounter();
+    return $li;
   };
 
   createCompleteHandler = (obj) => {
@@ -161,24 +162,6 @@ export default class TodoController {
     const theId = $li.id;
     const $modifyForm = document.createElement('form');
     $modifyForm.className = 'modify-form';
-    const $modifyInput = document.createElement('input');
-    $modifyInput.className = 'modify-input';
-    const modifyObj = this.model.todoStorage.find(
-      (todo) => todo.id === parseInt(theId)
-    );
-    $modifyInput.value = modifyObj['text'];
-
-    const $modifyBtn = document.createElement('button');
-    $modifyBtn.className = 'modified-btn';
-    $modifyBtn.innerText = '수정 완료';
-    $modifyForm.addEventListener('submit', (e) => modifySubmitHandler(e));
-    $modifyForm.appendChild($modifyInput);
-    $modifyForm.appendChild($modifyBtn);
-    $li.childNodes[1].replaceWith($modifyForm);
-    $li.childNodes[2].remove();
-    $li.childNodes[2].remove();
-    $li.childNodes[2].remove();
-    $modifyInput.focus();
     const modifySubmitHandler = () => {
       e.preventDefault();
       const changedText = $modifyInput.value;
@@ -192,7 +175,33 @@ export default class TodoController {
       modifyObj['text'] = changedText;
       this.model.todoStorage.splice(modifyObjIndex, 1, modifyObj);
       this.model.saveTodo(TodoModel.TODO_KEY, this.model.todoStorage);
+      const $modifiedLine = this.createTodoHandler(modifyObj);
+      $li.replaceWith($modifiedLine);
     };
+    //Form 새로고침 문제 해결 : addEventListener 대신에 onsubmit을 사용해서 form이 submit되면 event.preventDefault()를 먼저 실행하고 Handler 함수가 실행되도록 설정하였다.
+    $modifyForm.onsubmit = function (event) {
+      event.preventDefault();
+      modifySubmitHandler();
+    };
+    const $modifyInput = document.createElement('input');
+    $modifyInput.className = 'modify-input';
+    const modifyObj = this.model.todoStorage.find(
+      (todo) => todo.id === parseInt(theId)
+    );
+    $modifyInput.value = modifyObj['text'];
+
+    const $modifyBtn = document.createElement('button');
+    $modifyBtn.className = 'modified-btn';
+    $modifyBtn.innerText = '수정 완료';
+    // $modifyForm.addEventListener('submit', modifySubmitHandler);
+
+    $modifyForm.appendChild($modifyInput);
+    $modifyForm.appendChild($modifyBtn);
+    $li.childNodes[1].replaceWith($modifyForm);
+    $li.childNodes[2].remove();
+    $li.childNodes[2].remove();
+    $li.childNodes[2].remove();
+    $modifyInput.focus();
   }
   deleteBtnHandler(e) {
     const $li = e.target.parentElement;
