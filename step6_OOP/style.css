@@ -100,7 +100,7 @@ li {
 }
 
 .add-day {
-  background-color: #8ecae6;
+  background-color: var(--todo1);
   border: 1px solid #fff;
   border-radius: 10px;
   width: 55px;
@@ -147,7 +147,7 @@ li {
 }
 
 .add-day-done {
-  background-color: #8ecae6;
+  background-color: var(--todo1);
   border: 1px solid #fff;
   border-radius: 10px;
   width: 55px;
@@ -240,4 +240,104 @@ li {
   .modify-input {
     width: 325px;
   }
+}
+
+.achievement-btn {
+  position: absolute;
+  top: 160px;
+  padding: 8px;
+  align-items: center;
+  background-color: var(--todo1);
+}
+
+.achievements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #375e70;
+  color: rgb(255, 255, 255);
+  font-size: 22px;
+  min-height: 100vh;
+  width: 454.5px;
+  padding: 20px;
+  transform: translateX(-454.5px);
+}
+
+.achievements.show {
+  transform: translateX(0);
+}
+
+.day-div {
+  background-color: var(--add);
+  color: var(--done1);
+  border: 5px solid var(--done1);
+  font-size: 25px;
+  border-radius: 15px;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  padding: 20px;
+  /* flex-direction: column; */
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 7px;
+  margin: 0px 0px 7px 0px;
+}
+.achievement-day {
+  position: absolute;
+}
+.counter {
+  font-size: 22px;
+  position: relative;
+  left: 175px;
+  padding: 1px 4px 1px 9px;
+  color: #fff;
+  border-radius: 30px;
+  background-color: var(--done1);
+  text-shadow: 2px 2px 2px #023047;
+}
+.achievement-Card {
+  background-color: var(--done2);
+  color: var(--add);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.end-time {
+  color: #fff;
+  font-size: 21px;
+  letter-spacing: 1px;
+  margin: 0;
+  padding: 0;
+  text-shadow: 2px 2px 2px #497488;
+}
+
+.achievement {
+  font-size: 19px;
+  margin: 0;
+  margin-bottom: 7px;
+  padding: 0;
+}
+
+.achievement-div {
+  margin-bottom: 10px;
+}
+
+.achievements h2 {
+  margin-top: 55px;
+  display: flex;
+  justify-content: center;
+}
+
+.close-btn {
+  background-color: var(--done1);
+  padding: 8px;
+  position: absolute;
+  top: 20px;
+  left: 201px;
 }

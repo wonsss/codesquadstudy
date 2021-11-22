@@ -14,11 +14,8 @@ export default class TodoView {
     this.$doneList = document.getElementById('done-list');
     this.$todoCount = document.getElementById('todo-count');
     this.$completeCount = document.getElementById('complete-count');
+    this.$achievementDiv = document.getElementById('achievementDiv');
   }
-
-  //   getTodoElementById(id) {
-  //     return document.getElementById(id);
-  //   }
 
   renderTodo(li) {
     this.$toDoList.prepend(li);
@@ -31,5 +28,13 @@ export default class TodoView {
   renderCounter() {
     this.$todoCount.innerText = this.model.todoStorage.length;
     this.$completeCount.innerText = this.model.completeStorage.length;
+  }
+
+  renderAchievement(li) {
+    this.$achievementDiv.prepend(li);
+  }
+
+  clearAchievement() {
+    this.$achievementDiv.innerHTML = '';
   }
 }

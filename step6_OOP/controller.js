@@ -11,6 +11,7 @@ export default class TodoController {
   constructor(model, view) {
     this.model = model;
     this.view = view;
+    this.alreadyShow = false;
   }
 
   //버튼 클릭하면 인풋데이터 가져온다.
@@ -193,7 +194,6 @@ export default class TodoController {
     const $modifyBtn = document.createElement('button');
     $modifyBtn.className = 'modified-btn';
     $modifyBtn.innerText = '수정 완료';
-    // $modifyForm.addEventListener('submit', modifySubmitHandler);
 
     $modifyForm.appendChild($modifyInput);
     $modifyForm.appendChild($modifyBtn);
@@ -235,4 +235,67 @@ export default class TodoController {
     this.createCompleteHandler(completeObj);
     this.model.saveTodo(TodoModel.COMPLETE_KEY, this.model.completeStorage);
   }
+
+  showAchievement() {
+    const showAchievementBtn = document.getElementById('achievement-btn');
+    const closeBtn = document.getElementById('close-btn');
+    const achievements = document.getElementById('achievements');
+    showAchievementBtn.addEventListener('click', () => {
+      achievements.classList.add('show');
+      this.createAchievementsByDateHandler();
+    });
+    closeBtn.addEventListener('click', () => {
+      achievements.classList.remove('show');
+      this.view.clearAchievement();
+      this.alreadyShow = false;
+    });
+  }
+
+  createAchievementsByDateHandler = () => {
+    if (this.alreadyShow === true) {
+      return;
+    }
+    this.alreadyShow = true;
+    const collectionByDate = {};
+    this.model.completeStorage.forEach((obj) => {
+      const targetDate = obj['endDay'].slice(0, 5);
+      if (!Object.keys(collectionByDate).includes(targetDate)) {
+        collectionByDate[targetDate] = [];
+      }
+    });
+    this.model.completeStorage.forEach((obj) => {
+      const targetDate = obj['endDay'].slice(0, 5);
+      collectionByDate[targetDate].push(obj);
+    });
+    const createDateAchievement = (obj, date) => {
+      const $li = document.createElement('div');
+      $li.className = 'achievement-Card';
+      const $dayDiv = document.createElement('div');
+      $dayDiv.className = 'day-div';
+      const $daySpan = document.createElement('span');
+      $daySpan.innerText = date;
+      $daySpan.className = 'achievement-day';
+      const $counter = document.createElement('span');
+      $counter.innerText = Object.keys(obj).length;
+      $counter.className = 'counter';
+      $dayDiv.appendChild($daySpan);
+      $dayDiv.appendChild($counter);
+      $li.appendChild($dayDiv);
+
+      for (const key in obj) {
+        const $todoP = document.createElement('p');
+        $todoP.innerText = obj[key].text;
+        $todoP.className = 'achievement';
+        const $endTime = document.createElement('span');
+        $endTime.innerText = obj[key].endDay.slice(7, 12);
+        $endTime.className = 'end-time';
+        $li.appendChild($endTime);
+        $li.appendChild($todoP);
+      }
+      this.view.renderAchievement($li);
+    };
+    for (const date in collectionByDate) {
+      createDateAchievement(collectionByDate[date], date);
+    }
+  };
 }
