@@ -1,0 +1,7 @@
+{
+  "name": "TodoList",
+  "type": "module",
+  "description": "Practice of Vanila Javascript and OOP method",
+  "main": "app.js",
+  "author": "Marco"
+}

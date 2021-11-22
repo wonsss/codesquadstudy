@@ -1,0 +1,243 @@
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
+:root {
+  --add: #023047;
+  --todo1: #219ebc;
+  --todo2: #8ecae6;
+  --done1: #fb8500;
+  --done2: #ffb703;
+}
+* {
+  box-sizing: border-box;
+  font-family: 'Jua', sans-serif;
+}
+
+body {
+  background-color: #f7f7f7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+}
+h1 {
+  font-size: 40px;
+}
+.container {
+  margin: 30px auto;
+  width: 800px;
+}
+
+.add-container {
+}
+
+.form {
+  padding-bottom: 20px;
+  margin: 20px 0;
+}
+
+.add-form {
+  display: flex;
+  justify-content: space-between;
+}
+
+.todo-container {
+}
+
+.done-container {
+}
+
+input {
+  border: 1px solid #dedede;
+  border-radius: 5px;
+  display: block;
+  padding: 10px;
+  margin-right: 5px;
+  width: 85%;
+  color: var(--add);
+  font-size: 18px;
+}
+
+button {
+  border: 0;
+  display: block;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  color: #fff;
+}
+.add-btn {
+  background-color: var(--add);
+  color: #fff;
+  width: 15%;
+}
+
+input:focus,
+button:focus {
+  outline: 0;
+}
+
+li {
+  list-style-type: none;
+}
+.todo-list {
+  padding: 0;
+  margin: 0;
+}
+
+.todo-line {
+  background-color: #a7d8ee;
+  color: var(--add);
+  padding: 8px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0 0 5px 0;
+  font-size: 18px;
+}
+
+.add-day {
+  background-color: #8ecae6;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  width: 55px;
+  margin-right: 5px;
+  padding: 5px;
+  color: #fff;
+  font-size: 15px;
+}
+
+.todo-span {
+  width: 90%;
+  display: block;
+}
+
+.delete-btn {
+  width: 50px;
+  height: 40px;
+  background-color: #497488;
+  margin-right: 3px;
+}
+
+.complete-btn {
+  width: 50px;
+  height: 40px;
+  background-color: var(--done1);
+}
+
+.done-list {
+  margin: 0 0 4px 0;
+  padding: 0;
+}
+
+.done-line {
+  background-color: #ffd058;
+  color: var(--add);
+  padding: 8px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0 0 5px 0;
+  font-size: 18px;
+}
+
+.add-day-done {
+  background-color: #8ecae6;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  width: 55px;
+  margin-right: 5px;
+  padding: 5px;
+  color: #fff;
+  font-size: 15px;
+}
+.end-day {
+  background-color: var(--done1);
+  border: 1px solid #fff;
+  border-radius: 10px;
+  padding: 5px;
+  width: 50px;
+  color: #fff;
+  margin-right: 10px;
+  font-size: 15px;
+}
+
+.done-span {
+  width: 80%;
+  display: block;
+}
+
+.back-btn {
+  width: 42px;
+  height: 45px;
+  background-color: #fb8500;
+  margin-left: 2px;
+}
+
+.todo-count {
+  background-color: var(--todo1);
+  font-size: 20px;
+  padding: 3px 9px;
+  border-radius: 30px;
+  color: #fff;
+}
+.complete-count {
+  background-color: var(--done1);
+  font-size: 20px;
+  padding: 3px 9px;
+  border-radius: 30px;
+  color: #fff;
+}
+
+.modify-form {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.modify-div {
+  position: relative;
+}
+.modify-input {
+  border: 1px solid #dedede;
+  border-radius: 5px;
+  display: block;
+  padding: 10px;
+  margin: 0 5px 0 5px;
+  width: 670px;
+  height: 40px;
+  color: var(--todo1);
+}
+.modified-btn {
+  width: 42px;
+  height: 45px;
+  color: #fff;
+  background-color: var(--todo1);
+}
+
+.modify-btn {
+  width: 50px;
+  height: 40px;
+  background-color: #219ebc;
+  margin-right: 3px;
+}
+
+@media (max-width: 800px) {
+  h1 {
+    font-size: 30px;
+  }
+  .container {
+    width: 450px;
+  }
+  button {
+    font-size: 15px;
+  }
+  .modify-input {
+    width: 325px;
+  }
+}

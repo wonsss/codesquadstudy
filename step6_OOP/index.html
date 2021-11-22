@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css">
+    <title>두둥리스트</title>
+  <body>
+      <h1>오늘 할 일을 내일로 미루지 말자</h1>
+      <div class="container">
+          <h2>할 일 추가</h2>
+          <div class="add-container">
+              <form id="form">
+                  <div class="add-form">              <input type="text" id="add-input" placeholder="오늘 할 일을 입력해주세요.">
+                  <button class="add-btn">추가</button></div>
+              </form>
+          </div>
+          <h2>할 일  <span class="todo-count" id="todo-count">0</span></h2>
+            <div class="todo-container">
+                <ul id="todo-list" class="todo-list">
+                    <!-- prepend 넣을곳 -->
+                </ul>
+            </div>
+            <h2>완료한 일   <span class="complete-count" id="complete-count">0</span></h2>
+            <div class="done-container">
+                <ul id="done-list" class="done-list">
+                       <!-- prepend 넣을곳 -->
+                </ul>
+            </div>
+      </div>
+    <ul></ul>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
