@@ -243,10 +243,8 @@ li {
 }
 
 .achievement-btn {
-  position: absolute;
-  top: 160px;
+  position: relative;
   padding: 8px;
-  align-items: center;
   background-color: var(--todo1);
 }
 
@@ -339,5 +337,5 @@ li {
   padding: 8px;
   position: absolute;
   top: 20px;
-  left: 201px;
+  left: 207px;
 }
