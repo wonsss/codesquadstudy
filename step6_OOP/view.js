@@ -15,6 +15,7 @@ export default class TodoView {
     this.$todoCount = document.getElementById('todo-count');
     this.$completeCount = document.getElementById('complete-count');
     this.$achievementDiv = document.getElementById('achievementDiv');
+
   }
 
   renderTodo(li) {

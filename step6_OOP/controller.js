@@ -164,7 +164,7 @@ export default class TodoController {
     const $modifyForm = document.createElement('form');
     $modifyForm.className = 'modify-form';
     const modifySubmitHandler = () => {
-      e.preventDefault();
+      // e.preventDefault();
       const changedText = $modifyInput.value;
       const modifyObj = this.model.todoStorage.find(
         (todo) => todo.id === parseInt(theId)
@@ -249,6 +249,10 @@ export default class TodoController {
       this.view.clearAchievement();
       this.alreadyShow = false;
     });
+    window.addEventListener('mouseup', () => {
+      const popup = document.getElementById('achievements');
+      popup.classList.remove('show');
+    });
   }
 
   createAchievementsByDateHandler = () => {
@@ -263,6 +267,7 @@ export default class TodoController {
         collectionByDate[targetDate] = [];
       }
     });
+
     this.model.completeStorage.forEach((obj) => {
       const targetDate = obj['endDay'].slice(0, 5);
       collectionByDate[targetDate].push(obj);
@@ -283,14 +288,14 @@ export default class TodoController {
       $li.appendChild($dayDiv);
 
       for (const key in obj) {
-        const $todoP = document.createElement('p');
-        $todoP.innerText = obj[key].text;
-        $todoP.className = 'achievement';
+        const $doneSpan = document.createElement('p');
+        $doneSpan.innerText = obj[key].text;
+        $doneSpan.className = 'achievement-span';
         const $endTime = document.createElement('span');
         $endTime.innerText = obj[key].endDay.slice(7, 12);
         $endTime.className = 'end-time';
         $li.appendChild($endTime);
-        $li.appendChild($todoP);
+        $li.appendChild($doneSpan);
       }
       this.view.renderAchievement($li);
     };
