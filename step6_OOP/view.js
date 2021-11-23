@@ -8,14 +8,16 @@
       - 3. View가 Model로부터 데이터를 받을 때는, 사용자마다 다르게 보여주어야 하는 데이터에 대해서만 받아야 한다. 
       - 4. View가 Model로부터 데이터를 받을 때는, 반드시 Controller에서 받아야 한다.  */
 export default class TodoView {
-  constructor(model) {
+  constructor(
+    model,
+    { $toDoList, $doneList, $todoCount, $completeCount, $achievementDiv }
+  ) {
     this.model = model;
-    this.$toDoList = document.getElementById('todo-list');
-    this.$doneList = document.getElementById('done-list');
-    this.$todoCount = document.getElementById('todo-count');
-    this.$completeCount = document.getElementById('complete-count');
-    this.$achievementDiv = document.getElementById('achievementDiv');
-
+    this.$toDoList = $toDoList;
+    this.$doneList = $doneList;
+    this.$todoCount = $todoCount;
+    this.$completeCount = $completeCount;
+    this.$achievementDiv = $achievementDiv;
   }
 
   renderTodo(li) {

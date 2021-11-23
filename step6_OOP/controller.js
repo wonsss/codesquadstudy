@@ -12,11 +12,6 @@ export default class TodoController {
     this.model = model;
     this.view = view;
     this.alreadyShow = false;
-    this.submitFormHandler = this.submitFormHandler.bind(this);
-    this.createTodoHandler = this.createTodoHandler.bind(this);
-    this.createCompleteHandler = this.createCompleteHandler.bind(this);
-    this.createAchievementsByDateHandler =
-      this.createAchievementsByDateHandler.bind(this);
   }
 
   //버튼 클릭하면 인풋데이터 가져온다.
@@ -36,12 +31,12 @@ export default class TodoController {
       this.model.completeStorage
     );
 
-    this.model.todoStorage.forEach(this.createTodoHandler);
-    this.model.completeStorage.forEach(this.createCompleteHandler);
+    this.model.todoStorage.forEach(this.createTodoHandler.bind(this));
+    this.model.completeStorage.forEach(this.createCompleteHandler.bind(this));
     this.view.renderCounter();
     document
       .getElementById('form')
-      .addEventListener('submit', this.submitFormHandler);
+      .addEventListener('submit', this.submitFormHandler.bind(this));
   }
 
   beautifyTime(number) {
@@ -248,7 +243,7 @@ export default class TodoController {
     const achievements = document.getElementById('achievements');
     showAchievementBtn.addEventListener('click', () => {
       achievements.classList.add('show');
-      this.createAchievementsByDateHandler();
+      this.createAchievementsByDateHandler.bind(this)();
     });
     closeBtn.addEventListener('click', () => {
       achievements.classList.remove('show');
