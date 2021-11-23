@@ -12,21 +12,24 @@ export default class TodoController {
     this.model = model;
     this.view = view;
     this.alreadyShow = false;
+    this.submitFormHandler = this.submitFormHandler.bind(this);
+    this.createTodoHandler = this.createTodoHandler.bind(this);
+    this.createCompleteHandler = this.createCompleteHandler.bind(this);
+    this.createAchievementsByDateHandler =
+      this.createAchievementsByDateHandler.bind(this);
   }
 
   //버튼 클릭하면 인풋데이터 가져온다.
   getInputData() {
     const $inputTodoData = document.getElementById('add-input');
-    const value = $inputTodoData.value; //C
+    const value = $inputTodoData.value;
     TodoModel.prototype.setTodoDataFromUser(value);
-    $inputTodoData.value = ''; //C
+    $inputTodoData.value = '';
   }
 
   //새로고침하면 데이터를 받고 엘리먼트를 만든다.
   getDataAndCreateElementWhenOnload() {
     //Model클래스에게 로컬스토리지 데이터를 받아서 저장하라고 명령
-    // this.model.getTodoDataFromLocal();
-    // this.model.getCompleteDataFromLocal();
     this.model.getDataFromLocal(TodoModel.TODO_KEY, this.model.todoStorage);
     this.model.getDataFromLocal(
       TodoModel.COMPLETE_KEY,
@@ -45,7 +48,8 @@ export default class TodoController {
     return number < 10 ? `0${number}` : number;
   }
 
-  submitFormHandler = (e) => {
+  //this바이닝
+  submitFormHandler(e) {
     e.preventDefault();
     const now = new Date();
     const month = now.getMonth() + 1;
@@ -66,9 +70,10 @@ export default class TodoController {
     this.model.pushDataToStorage(newTodoObj, this.model.todoStorage);
     this.model.saveTodo(TodoModel.TODO_KEY, this.model.todoStorage);
     this.view.renderCounter();
-  };
+  }
 
-  createTodoHandler = (obj) => {
+  //this바인딩
+  createTodoHandler(obj) {
     const $li = document.createElement('li');
     $li.className = 'todo-line';
     $li.id = obj.id;
@@ -110,9 +115,10 @@ export default class TodoController {
     this.view.renderTodo($li);
     this.view.renderCounter();
     return $li;
-  };
+  }
 
-  createCompleteHandler = (obj) => {
+  //this바인딩
+  createCompleteHandler(obj) {
     const $li = document.createElement('li');
     $li.className = 'done-line';
     $li.id = obj.id;
@@ -137,7 +143,7 @@ export default class TodoController {
     $li.appendChild($backBtn);
     this.view.renderComplete($li);
     this.view.renderCounter();
-  };
+  }
 
   backBtnHandler(e) {
     e.preventDefault();
@@ -256,7 +262,8 @@ export default class TodoController {
     });
   }
 
-  createAchievementsByDateHandler = () => {
+  //this바인딩
+  createAchievementsByDateHandler() {
     if (this.alreadyShow === true) {
       return;
     }
@@ -303,5 +310,5 @@ export default class TodoController {
     for (const date in collectionByDate) {
       createDateAchievement(collectionByDate[date], date);
     }
-  };
+  }
 }
