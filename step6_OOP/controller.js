@@ -249,7 +249,8 @@ export default class TodoController {
       this.view.clearAchievement();
       this.alreadyShow = false;
     });
-    window.addEventListener('mouseup', () => {
+    const contents = document.getElementById('contents');
+    contents.addEventListener('mouseup', () => {
       const popup = document.getElementById('achievements');
       popup.classList.remove('show');
     });
