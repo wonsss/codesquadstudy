@@ -21,13 +21,7 @@ function showLayers() {
   });
 }
 
-$listBox.addEventListener('mouseenter', showLayers);
-
 function waitMousemove(e) {
-  const fruitName = e.target.innerText;
-  if (!Object.keys(RecorderOfDisplayedFruits).includes(fruitName)) {
-    recordNumberOfMousemove(e);
-  }
   if (!scheduled) {
     scheduled = true;
     setTimeout(() => {
@@ -36,33 +30,44 @@ function waitMousemove(e) {
   }
 }
 
+function createOutputLi(fruitName) {
+  const $outputLi = document.createElement('li');
+  $outputLi.className = 'outputLi';
+  $outputLi.id = fruitName;
+  return $outputLi;
+}
+
+function createFruitSpan(e) {
+  const fruitName = e.target.innerText;
+  const $fruitName = document.createElement('span');
+  $fruitName.innerHTML = `${fruitName}: ${RecorderOfDisplayedFruits[
+    fruitName
+  ]++}`;
+  $fruitName.className = 'outputSpan';
+  return $fruitName;
+}
+
+function combineElement(e, fruitName) {
+  const $fruitName = createFruitSpan(e);
+  const $outputLi = createOutputLi(fruitName);
+  $outputLi.appendChild($fruitName);
+  return $outputLi;
+}
+
 function recordNumberOfMousemove(e) {
   scheduled = false;
   const fruitName = e.target.innerText;
   if (Object.keys(RecorderOfDisplayedFruits).includes(fruitName)) {
-    const $fruitName = document.createElement('span');
-    $fruitName.innerHTML = `${fruitName}: ${RecorderOfDisplayedFruits[
-      fruitName
-    ]++}`;
-    $fruitName.className = 'outputSpan';
-    const $outputLi = document.createElement('li');
-    $outputLi.className = 'outputLi';
-    $outputLi.id = fruitName;
-    $outputLi.appendChild($fruitName);
+    const $outputLi = combineElement(e, fruitName);
     document.getElementById(fruitName).replaceWith($outputLi);
   } else {
     RecorderOfDisplayedFruits[fruitName] = 1;
-    const $outputLi = document.createElement('li');
-    $outputLi.className = 'outputLi';
-    $outputLi.id = fruitName;
-    const $fruitName = document.createElement('span');
-    $fruitName.innerHTML = `${fruitName}: ${RecorderOfDisplayedFruits[fruitName]}`;
-    $fruitName.className = 'outputSpan';
-    $outputLi.appendChild($fruitName);
+    const $outputLi = combineElement(e, fruitName);
     $outputUl.append($outputLi);
   }
 }
 
+$listBox.addEventListener('mouseenter', showLayers);
 $layer1.addEventListener('mousemove', waitMousemove);
 $layer2.addEventListener('mousemove', waitMousemove);
 $layer3.addEventListener('mousemove', waitMousemove);
