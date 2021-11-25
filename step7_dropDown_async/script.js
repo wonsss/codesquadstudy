@@ -10,7 +10,7 @@ const $outputUl = document.getElementById('outputUl');
 
 const RecorderOfDisplayedFruits = {};
 
-let scheduled = false;
+let timer = false;
 
 function showLayers() {
   const timer = setTimeout(() => {
@@ -19,15 +19,6 @@ function showLayers() {
   $listBox.addEventListener('mouseleave', () => {
     clearTimeout(timer);
   });
-}
-
-function waitMousemove(e) {
-  if (!scheduled) {
-    scheduled = true;
-    setTimeout(() => {
-      recordNumberOfMousemove(e);
-    }, 500);
-  }
 }
 
 function createOutputLi(fruitName) {
@@ -55,15 +46,26 @@ function combineElement(e, fruitName) {
 }
 
 function recordNumberOfMousemove(e) {
-  scheduled = false;
   const fruitName = e.target.innerText;
-  if (Object.keys(RecorderOfDisplayedFruits).includes(fruitName)) {
+  if (
+    Object.prototype.hasOwnProperty.call(RecorderOfDisplayedFruits, fruitName)
+  ) {
     const $outputLi = combineElement(e, fruitName);
     document.getElementById(fruitName).replaceWith($outputLi);
   } else {
     RecorderOfDisplayedFruits[fruitName] = 1;
     const $outputLi = combineElement(e, fruitName);
     $outputUl.append($outputLi);
+  }
+}
+
+function waitMousemove(e) {
+  if (!timer) {
+    timer = true;
+    setTimeout(() => {
+      timer = false;
+      recordNumberOfMousemove(e);
+    }, 500);
   }
 }
 
