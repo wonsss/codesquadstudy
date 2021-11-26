@@ -20,12 +20,14 @@ const rl = require('readline').createInterface({
 });
 const list = [];
 rl.on('line', (line) => {
-  //rl.close()가 없어서 엔터를 눌러 줄이 바뀌어도 계속 입력된다.
-  //로컬에서 강제로 중지하려면 Ctrl+C나 Ctrl+D
-  //한 줄에 입력된 값을 한 칸 띄어쓰기 기준으로 배열에 push
+
+  // rl.close()가 없어서 엔터를 눌러 줄이 바뀌어도 계속 입력된다.
+  // 로컬에서 강제로 중지하려면 Ctrl+C나 Ctrl+D
+  // 한 줄에 입력된 값을 한 칸 띄어쓰기 기준으로 배열에 push
+
   list.push(line.split(''));
 }).on('close', () => {
-  //코드작성구간시작
+  // 코드작성구간시작
   //   console.log(list);
 
   for (let i = 1; i <= list[0]; i++) {
@@ -51,6 +53,6 @@ rl.on('line', (line) => {
     console.log(answer);
   }
 
-  //코드작성구간끝
+  // 코드작성구간끝
   process.exit();
 });
