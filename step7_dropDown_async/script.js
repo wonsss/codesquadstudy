@@ -9,8 +9,7 @@ const $layer6 = document.getElementById('layer6');
 const $outputUl = document.getElementById('outputUl');
 
 const RecorderOfDisplayedFruits = {};
-
-let timer = false;
+let scheduled = false;
 
 function showLayers() {
   const timer = setTimeout(() => {
@@ -44,7 +43,7 @@ function combineElement(e, fruitName) {
   $outputLi.appendChild($fruitName);
   return $outputLi;
 }
-
+// Object.prototype.toString.call(e)
 function recordNumberOfMousemove(e) {
   const fruitName = e.target.innerText;
   if (
@@ -60,10 +59,10 @@ function recordNumberOfMousemove(e) {
 }
 
 function waitMousemove(e) {
-  if (!timer) {
-    timer = true;
+  if (!scheduled) {
+    scheduled = true;
     setTimeout(() => {
-      timer = false;
+      scheduled = false;
       recordNumberOfMousemove(e);
     }, 500);
   }

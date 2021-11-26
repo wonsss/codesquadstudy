@@ -1,3 +1,4 @@
+/* eslint-disable import/extensions */
 import TodoModel from './model.js';
 import TodoView from './view.js';
 import TodoController from './controller.js';

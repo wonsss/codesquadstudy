@@ -1,11 +1,4 @@
-/*     - Controller
-      - Model과 View를 연결해주는 전반적 제어 기능 (주문도 받고 서빙도 하는 매니저)
-      - 사용자로부터 input을 받는다(view,url 등 통해)
-      - 요청을 처리한다(GET, POST, PUT, DELETE)
-      - Model로부터 데이터를 받는다.
-      - View에게 데이터를 전달한다.
-      - 5. Controller는 Model과 View에 의존해도 된다.
-        - Controller 내부에는 Model과 View의 코드가 있을 수 있다. */
+// eslint-disable-next-line import/extensions
 import TodoModel from './model.js';
 
 export default class TodoController {
@@ -15,17 +8,15 @@ export default class TodoController {
     this.alreadyShow = false;
   }
 
-  // 버튼 클릭하면 인풋데이터 가져온다.
-  static getInputData() {
+  // eslint-disable-next-line class-methods-use-this
+  getInputData() {
     const $inputTodoData = document.getElementById('add-input');
     const { value } = $inputTodoData;
     TodoModel.prototype.setTodoDataFromUser(value);
     $inputTodoData.value = '';
   }
 
-  // 새로고침하면 데이터를 받고 엘리먼트를 만든다.
   getDataAndCreateElementWhenOnload() {
-    // Model클래스에게 로컬스토리지 데이터를 받아서 저장하라고 명령
     this.model.getDataFromLocal(TodoModel.TODO_KEY, this.model.todoStorage);
     this.model.getDataFromLocal(
       TodoModel.COMPLETE_KEY,
@@ -40,11 +31,10 @@ export default class TodoController {
       .addEventListener('submit', this.submitFormHandler.bind(this));
   }
 
-  static beautifyTime(number) {
+  beautifyTime(number) {
     return number < 10 ? `0${number}` : number;
   }
 
-  // this바이닝
   submitFormHandler(e) {
     e.preventDefault();
     const now = new Date();
@@ -68,7 +58,6 @@ export default class TodoController {
     this.view.renderCounter();
   }
 
-  // this바인딩
   createTodoHandler(obj) {
     const $li = document.createElement('li');
     $li.className = 'todo-line';
@@ -113,7 +102,6 @@ export default class TodoController {
     return $li;
   }
 
-  // this바인딩
   createCompleteHandler(obj) {
     const $li = document.createElement('li');
     $li.className = 'done-line';
@@ -175,7 +163,6 @@ export default class TodoController {
     $modifyInput.value = modifyObj.text;
 
     const modifySubmitHandler = () => {
-      // e.preventDefault();
       const changedText = $modifyInput.value;
       const modifyObj = this.model.todoStorage.find(
         todo => todo.id === parseInt(theId, 10)
@@ -211,7 +198,7 @@ export default class TodoController {
 
   deleteBtnHandler(e) {
     const $li = e.target.parentElement;
-    $li.remove(); // delete버튼의 부모인 toto-line 요소를 지운다.
+    $li.remove();
     this.model.todoStorage = this.model.todoStorage.filter(
       todo => todo.id !== parseInt($li.id, 10)
     );
@@ -262,7 +249,6 @@ export default class TodoController {
     });
   }
 
-  //  this바인딩
   createAchievementsByDateHandler() {
     if (this.alreadyShow === true) {
       return;
