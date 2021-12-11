@@ -4,7 +4,6 @@ function quickSort(arr) {
   }
 
   const pivot = arr[0];
-  // console.log('pivot', pivot);
   const left = [];
   const right = [];
 
@@ -15,10 +14,12 @@ function quickSort(arr) {
       right.push(arr[i]);
     }
   }
-  // console.log('left', left);
-  // console.log('right', right);
-  return quickSort(left).concat(pivot, quickSort(right)); //재귀함수
+
+  return quickSort(left).concat(pivot, quickSort(right));
 }
+
+const data = [50, 100, 38, 48, 58, 29, 38, 49];
+console.log(quickSort(data));
 
 function testCase() {
   const data = [50, 100, 38, 48, 58, 29, 38, 49];
