@@ -8,7 +8,7 @@
     "commonjs": false,
     "es2021": true
   },
-  "globals": { "_": true },
+  "globals": {"_": true},
   "plugins": ["import", "html"],
   "extends": ["airbnb-base", "prettier"],
   "rules": {
@@ -31,7 +31,7 @@
     "prefer-arrow-callback": "error", // Require using arrow functions for callbacks
     "require-await": "error",
     "arrow-parens": ["error", "as-needed"], // a => {}
-    "no-param-reassign": ["error", { "props": false }],
+    "no-param-reassign": ["error", {"props": false}],
     "no-unused-expressions": [
       "error",
       {
@@ -40,7 +40,7 @@
         "allowTaggedTemplates": true
       }
     ],
-    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
     "max-len": [
       "error",
       {
