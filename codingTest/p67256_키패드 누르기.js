@@ -11,7 +11,11 @@ function solution(numbers, hand) {
     8: [2, 1],
     9: [2, 2],
     0: [3, 1],
+
+
+
   });
+
   const handPlace = {
     left: [3, 0],
     right: [3, 2],
@@ -48,9 +52,10 @@ function solution(numbers, hand) {
 
   numbers.forEach(number => {
     const location = keypad[number];
-    if ([1, 4, 7].includes(number)) {
+
+    if ([1, 4, 7,  ].includes(number)) {
       saveLocation("left", location);
-    } else if ([3, 6, 9].includes(number)) {
+    } else if ([3, 6, 9  ].includes(number)) {
       saveLocation("right", location);
     } else {
       getMidNumber(location);
